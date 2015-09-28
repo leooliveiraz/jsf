@@ -8,9 +8,9 @@
 <body> 
 	<h:form>
 		<h1>Ola #{ola2.nomeCompleto} </h1>
-		Nome:<h:inputText value="#{ola2.nome}" />
+		Nome:<h:inputText value="##{ola2.nome}" />
 		<br />
-		Sobrenome:<h:inputText value="#{ola2.sobrenome}" />
+		Sobrenome:<h:inputText value="##{ola2.sobrenome}" />
 		<br />
 		<h:commandButton value="Dizer olá" 
 			action = "#{ola2.dizerOla()}"/>

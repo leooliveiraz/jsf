@@ -21,5 +21,10 @@
    <value/>
   </managed-property>
  </managed-bean>
+ <managed-bean>
+ 	<managed-bean-name>ola2</managed-bean-name>
+ 	<managed-bean-class>controle.Ola2Bean</managed-bean-class>
+ 	<managed-bean-scope>request</managed-bean-scope>
+ </managed-bean>
  <application/>
 </faces-config>
