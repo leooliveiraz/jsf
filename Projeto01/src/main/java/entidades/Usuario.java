@@ -90,7 +90,7 @@ public class Usuario implements java.io.Serializable {
 		this.dtCadastro = dtCadastro;
 	}
 
-	@Column(name = "senha", nullable = false, length = 32)
+	@Column(name = "senha", nullable = false, length = 64)
 	public String getSenha() {
 		return this.senha;
 	}
