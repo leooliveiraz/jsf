@@ -4,27 +4,12 @@
  <managed-bean>
   <managed-bean-name>nomesBean</managed-bean-name>
   <managed-bean-class>controle.NomesBean</managed-bean-class>
-  <managed-bean-scope>request</managed-bean-scope>
+  <managed-bean-scope>view</managed-bean-scope>
  </managed-bean>
  <managed-bean>
   <managed-bean-name>ola</managed-bean-name>
   <managed-bean-class>controle.OlaBean</managed-bean-class>
   <managed-bean-scope>request</managed-bean-scope>
- </managed-bean>
- <managed-bean>
-  <managed-bean-name>raul</managed-bean-name>
-  <managed-bean-class>controle.RaulBean</managed-bean-class>
-  <managed-bean-scope>request</managed-bean-scope>
-  <managed-property>
-   <property-name>raul</property-name>
-   <property-class>java.lang.String</property-class>
-   <value/>
-  </managed-property>
- </managed-bean>
- <managed-bean>
- 	<managed-bean-name>ola2</managed-bean-name>
- 	<managed-bean-class>controle.Ola2Bean</managed-bean-class>
- 	<managed-bean-scope>request</managed-bean-scope>
  </managed-bean>
  <application/>
 </faces-config>
