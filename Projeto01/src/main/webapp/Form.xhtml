@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<title>Form</title>
+</h:head>
+<h:body>
+	<h:form>
+		<h:inputText value="" />
+		<h:inputSecret value="Senha" />
+		<br />
+		<h:inputTextarea cols="40" rows="3" />
+
+		<h:graphicImage library="imagens" name="sc-grande.jpg" width="200"
+			height="36" />
+		<br />
+
+		<h:outputLabel value="Time de futebol favorito: " for="timeFutebol" />
+		<h:selectOneMenu>
+			<f:selectItem itemValue="Corinthians" />
+			<f:selectItem itemValue="Flamengo" />
+			<f:selectItem itemValue="Palmeiras" />
+			<f:selectItem itemValue="Santos" />
+			<f:selectItem itemValue="São Paulo" />
+			<f:selectItem itemValue="Vasco" />
+			<f:selectItem itemValue="Outro" />
+		</h:selectOneMenu>
+
+		<h:outputLabel value="Times de futebol favoritos: " for="timeFutebol" />
+		<h:selectManyMenu>
+			<f:selectItem itemValue="Corinthians" />
+			<f:selectItem itemValue="Flamengo" />
+			<f:selectItem itemValue="Palmeiras" />
+			<f:selectItem itemValue="Santos" />
+			<f:selectItem itemValue="São Paulo" />
+			<f:selectItem itemValue="Vasco" />
+			<f:selectItem itemValue="Outro" />
+		</h:selectManyMenu>
+
+		<h:selectOneRadio id="sexo">
+			<f:selectItem itemValue="M" itemLabel="Masculino" />
+			<f:selectItem itemValue="F" itemLabel="Feminino" />
+		</h:selectOneRadio>
+
+		<h:selectBooleanCheckbox id="aceite"
+			value="#{cadastroUsuarioBean.termoAceito}" />
+		<h:outputLabel value="Li e aceito os termos e condições" for="aceite" />
+
+
+		<h:panelGrid columns="2">
+			<f:facet name="header">
+				<h:outputText value="Dados para cadastro" />
+			</f:facet>
+			<h:outputText value="Nome:" />
+			<h:inputText size="20" />
+			<h:outputText value="E-mail:" />
+			<h:inputText size="40" />
+			<h:outputText value="Senha:" />
+			<h:inputSecret size="20" />
+			<h:outputText />
+			<h:commandButton value="Cadastrar" />
+		</h:panelGrid>
+
+		<h:commandButton id="cadastrar" value="Cadastrar" type="submit"
+			action="#{cadastroBean.cadastrar}" />
+		<br />
+
+		<h:commandLink id="TESTE" value="TESTE"
+			action="#{cadastroBean.cadastrar}" />
+
+		<h:commandLink id="voltar" action="home">
+			<h:graphicImage value="/imagens/voltar.png" />
+			<h:outputText value="Voltar" />
+		</h:commandLink>
+
+
+	</h:form>
+
+
+</h:body>
+</html>
