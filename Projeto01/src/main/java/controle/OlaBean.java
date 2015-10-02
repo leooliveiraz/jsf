@@ -1,8 +1,10 @@
 package controle;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 
-@ManagedBean(name="ola")
+@ManagedBean(name="olaBean")
+@RequestScoped
 public class OlaBean {
 
 	private String nome="",sobrenome,nomeCompleto;

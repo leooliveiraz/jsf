@@ -17,10 +17,6 @@ import javax.persistence.TemporalType;
 @Table(name = "usuario", catalog = "rfid_maternidade")
 public class Usuario implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private String cdUsuario;
 	private String nmUsuario;
 	private String cpf;

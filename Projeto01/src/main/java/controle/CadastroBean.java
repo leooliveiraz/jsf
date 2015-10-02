@@ -2,9 +2,11 @@ package controle;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
-@ManagedBean 
+@ManagedBean
+@RequestScoped
 public class CadastroBean {
 	private String nome;
 	public void cadastrar() {
