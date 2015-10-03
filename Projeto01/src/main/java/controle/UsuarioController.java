@@ -60,7 +60,9 @@ public class UsuarioController {
 		
 			session.getTransaction().commit();
 			session.close();
-			System.out.println("FSF");
+			for (int i = 0;i<usuarios.size();i++){
+				System.out.println(usuarios.get(i).getCdUsuario()+" "+usuarios.get(i).getNmUsuario()+" "+usuarios.get(i).getCpf());
+			}
 		} 	catch(Exception e){
 			System.out.println(e.getMessage()+",\n"+e.getCause());
 			//e.printStackTrace();
