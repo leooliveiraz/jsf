@@ -109,7 +109,7 @@ public class DaoUsuarioTest {
 			//e.printStackTrace();
 			fail("Não foi possivel completar a busca");
 		}
-	}
+	}*/
 
 	@Test
 	public void testBuscaTodos() {
@@ -130,6 +130,6 @@ public class DaoUsuarioTest {
 			//e.printStackTrace();
 			fail("Não foi possivel completar a busca");
 		}
-	}*/
+	}
 
 }

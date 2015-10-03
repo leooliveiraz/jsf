@@ -3,6 +3,9 @@ package entidades;
 // Generated 01/09/2015 00:07:35 by Hibernate Tools 4.0.0
 
 import java.util.Date;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -98,5 +101,6 @@ public class Usuario implements java.io.Serializable {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
+	
+	
 }
