@@ -8,38 +8,41 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-<title>
-FormUsuarip
-</title>
+	<title>FormUsuarip</title>
 </h:head>
 
 
-	
-	<h:body>
+
+<h:body>
 	<h:form>
-	<h:commandButton value="Cadastrar" action="#{usuarioController.consultaUsuario}" />
-	<p:dataTable var="usuarios" value="#{usuarioController.usuarios}">
-    <p:column headerText="Id">
-        <h:outputText value="#{usuarioController.cdUsuario}" />
-    </p:column>
-     <p:column headerText="Id">
-        <h:outputText value="#{usuarioController.nmUsuario}" />
-    </p:column>
-     <p:column headerText="Id">
-        <h:outputText value="#{usuarioController.cpf}" />
-    </p:column>
-     <p:column headerText="Id">
-        <h:outputText value="#{usuarioController.dtNascimento}" />
-    </p:column>
-     <p:column headerText="Id">
-        <h:outputText value="#{usuarioController.dtCadastro}" />
-    </p:column>
-     <p:column headerText="Id">
-        <h:outputText value="#{usuarioController.senha}" />
-    </p:column>
-	</p:dataTable>
+		<h:commandButton value="Cadastrar"
+			action="#{usuarioController.consultaUsuario}" />
+		<p:dataTable var="user" value="#{usuarioController.usuarios}">
+			<f:facet name="header">
+        List of Cars
+    </f:facet>
+
+			<p:column headerText="Id">
+				<h:outputText value="#{user.cdUsuario}" />
+			</p:column>
+
+			<p:column headerText="Year">
+				<h:outputText value="#{user.cpf}" />
+			</p:column>
+
+			<p:column headerText="Brand">
+				<h:outputText value="#{user.dtCadastro}" />
+			</p:column>
+
+			<p:column headerText="Color">
+				<h:outputText value="#{car.color}" />
+			</p:column>
+
+			<f:facet name="footer"> teste
+    </f:facet>
+		</p:dataTable>
 	</h:form>
-	</h:body>
+</h:body>
 
 
 </html>
