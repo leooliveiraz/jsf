@@ -1,26 +1,22 @@
 package controle;
 
-import static org.junit.Assert.fail;
-
 import java.util.Date;
-import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.hibernate.Session;
 
 import entidades.Usuario;
 import persistencia.DaoUsuario;
-import persistencia.GenericDao;
 import util.HibernateUtil;
-import util.Utilitarios;
 
-@ManagedBean(name="usuarioController")
-@RequestScoped
-public class UsuarioController {
+@ManagedBean(name="loginController")
+@SessionScoped
+public class LoginController {
 
 	private String cdUsuario;
 	private String nmUsuario;
@@ -28,51 +24,45 @@ public class UsuarioController {
 	private Date dtNascimento;
 	private Date dtCadastro;
 	private String senha;
-	private List<Usuario> usuarios;
 
-	public void cadastraUsuario(){
+
+	public String realizaLogin(){
 		try{
 
-			Usuario usuario = new Usuario(this.getCdUsuario(), this.getNmUsuario(), this.getCpf(), this.getDtNascimento(), this.getDtNascimento(), Utilitarios.sha256(this.getSenha()));
+			Usuario usuario = new Usuario();
 			Session session = HibernateUtil.getSession();
 			session.beginTransaction();
 
-			GenericDao<Usuario> dao = new GenericDao<Usuario>(Usuario.class,session);
+			DaoUsuario dao = new DaoUsuario(Usuario.class, session);
 
-			dao.salvar(usuario);
+			usuario = dao.buscaLogin(cdUsuario, senha);
 
-			session.getTransaction().commit();
 			session.close();
+			System.out.println(usuario.getCdUsuario()+" "+usuario.getNmUsuario()+" "+usuario.getCpf());
+			
+			this.cdUsuario = usuario.getCdUsuario();
+			this.nmUsuario = usuario.getNmUsuario();
+			this.cpf = usuario.getNmUsuario();
+			this.dtNascimento = usuario.getDtNascimento();
+			this.dtCadastro = usuario.getDtCadastro();
+			this.senha = usuario.getSenha();
+				
+			return "home.xhtml";
+			
+
 		} 	catch(Exception e){
 			System.out.println(e.getMessage()+",\n"+e.getCause());
 			//e.printStackTrace();
-			fail("Erro ao Salvar");
+			FacesContext context = FacesContext.getCurrentInstance();
+			FacesMessage mensagem = new FacesMessage(
+					FacesMessage.SEVERITY_ERROR, "Login não Efetuado.",
+					"Usuario não encontrado.");
+			context.addMessage(null, mensagem);	
+
+			return null;
 		}
+	}	
 
-	}
-
-	public void consultaUsuario(){
-		try{
-
-			Usuario usuario = new Usuario(this.getCdUsuario(), this.getNmUsuario(), this.getCpf(), this.getDtNascimento(), this.getDtNascimento(), this.getSenha());
-			Session session = HibernateUtil.getSession();
-			session.beginTransaction();
-
-			GenericDao<Usuario> dao = new GenericDao<Usuario>(Usuario.class,session);
-
-			this.usuarios = dao.buscaTodos();
-
-			session.getTransaction().commit();
-			session.close();
-			for (int i = 0;i<usuarios.size();i++){
-				System.out.println(usuarios.get(i).getCdUsuario()+" "+usuarios.get(i).getNmUsuario()+" "+usuarios.get(i).getCpf());
-			}
-		} 	catch(Exception e){
-			System.out.println(e.getMessage()+",\n"+e.getCause());
-			//e.printStackTrace();
-			fail("Erro ao Salvar");
-		}
-	}
 
 
 
@@ -133,10 +123,6 @@ public class UsuarioController {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}
-
-	public List<Usuario> getUsuarios(){
-		return usuarios;
 	}
 
 }
