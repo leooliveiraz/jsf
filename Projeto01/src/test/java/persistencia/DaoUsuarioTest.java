@@ -14,7 +14,30 @@ import entidades.Usuario;
 
 public class DaoUsuarioTest {
 
+
 	@Test
+	public void testBuscaLogin() {
+		try{
+			
+			Session session = HibernateUtil.getSession();
+			Usuario usuario ;
+			DaoUsuario dao = new DaoUsuario(Usuario.class,session);		
+			usuario = dao.buscaLogin("LPROCHA", "teste");
+			session.close();
+
+			System.out.println(usuario.getCdUsuario()+" "+usuario.getNmUsuario()+" "+usuario.getCpf()+" "+usuario.getDtCadastro()+" "+usuario.getDtNascimento());
+		}
+		catch(Exception e){
+			System.out.println(e.getMessage()+",\n"+e.getCause());
+			//e.printStackTrace();
+			fail("Erro ao Salvar");
+		}
+	}
+	
+
+	/*
+	 * 
+		@Test
 	public void testSalvar() {
 		try{
 			Session session = HibernateUtil.getSession();
@@ -33,8 +56,6 @@ public class DaoUsuarioTest {
 		}
 	}
 	
-
-	/*
 	@Test
 	public void testAtualizar() {
 		try{
@@ -109,14 +130,14 @@ public class DaoUsuarioTest {
 			//e.printStackTrace();
 			fail("Não foi possivel completar a busca");
 		}
-	}*/
+	}
 
 	@Test
 	public void testBuscaTodos() {
 		try{
 			Session session = HibernateUtil.getSession();
 			List<Usuario> lista ;
-			GenericDao<Usuario> dao = new GenericDao<Usuario>(Usuario.class,session);		
+			DaoUsuario dao = new DaoUsuario(Usuario.class,session);		
 			lista = dao.buscaTodos();
 			session.close();
 			
@@ -130,6 +151,6 @@ public class DaoUsuarioTest {
 			//e.printStackTrace();
 			fail("Não foi possivel completar a busca");
 		}
-	}
+	}*/
 
 }
