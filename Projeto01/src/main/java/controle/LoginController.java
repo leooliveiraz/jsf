@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
 
@@ -39,16 +40,16 @@ public class LoginController {
 
 			session.close();
 			System.out.println(usuario.getCdUsuario()+" "+usuario.getNmUsuario()+" "+usuario.getCpf());
-			
+
 			this.cdUsuario = usuario.getCdUsuario();
 			this.nmUsuario = usuario.getNmUsuario();
 			this.cpf = usuario.getNmUsuario();
 			this.dtNascimento = usuario.getDtNascimento();
 			this.dtCadastro = usuario.getDtCadastro();
 			this.senha = usuario.getSenha();
-				
+
 			return "home.xhtml";
-			
+
 
 		} 	catch(Exception e){
 			System.out.println(e.getMessage()+",\n"+e.getCause());
@@ -63,7 +64,7 @@ public class LoginController {
 		}
 	}	
 
-
+	
 
 
 	public String getCdUsuario() {

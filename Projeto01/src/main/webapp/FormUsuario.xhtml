@@ -8,48 +8,44 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-<title>
-FormUsuarip
-</title>
+	<title>Cadastro de Usuario</title>
 </h:head>
 
 
-	
-	<h:body>
-	
+
+<h:body>
+
 	<h:form>
-		<h:outputText value="Usuario:" />
-		<h:inputText value="#{usuarioController.cdUsuario}" />
+		<p:outputLabel value="#{loginController.nmUsuario}" />
 		
-		<p></p>
-		
-		<h:outputText value="Nome:" />
-		<h:inputText value="#{usuarioController.nmUsuario}" />
-		
-		<p></p>
-		
-		<h:outputText value="CPF:" />
-		<h:inputText value="#{usuarioController.cpf}" />
-		
-		<p></p>
-		
-		<p:outputLabel value="Data de Nascimento" />
-	        <p:calendar id="dtnascimento" value="#{usuarioController.dtNascimento}" pattern="yyyy-mm-dd"/>
-	        
-	    <p></p>
-	        
-	    <p:outputLabel value="Data de Cadastro" />
-	        <p:calendar id="dtcadastro" value="#{usuarioController.dtCadastro}" pattern="yyyy-mm-dd"/>
-	        
-	    <p></p>
-	        
-		<h:outputText value="Senha:" />
-		<p:password id="senha" value="#{usuarioController.senha}" />
-		
-		<h:commandButton value="Cadastrar" action="#{usuarioController.cadastraUsuario}" />
+		<h:panelGrid columns="2">
+			<p:outputLabel value="Usuario:" />
+			<p:inputText value="#{usuarioController.cdUsuario}" />
+
+			<p:outputLabel value="Nome:" />
+			<p:inputText value="#{usuarioController.nmUsuario}" />
+
+			<p:outputLabel value="CPF:" />
+			<p:inputText value="#{usuarioController.cpf}" />
+
+			<p:outputLabel for="german" value="Data de Nascimento" />
+			<p:calendar id="german" value="#{usuarioController.dtNascimento}"
+				locale="pt_BR" navigator="true" pattern="dd/mm/yyyy" />
+
+			<p:outputLabel for="german" value="Data de Cadastro" />		
+			<p:calendar  value="#{usuarioController.dtCadastro}"
+				locale="pt_BR" navigator="true" pattern="dd/mm/yyyy" />
+
+			<p:outputLabel value="Senha:" />
+			<p:password id="senha" value="#{usuarioController.senha}" />
+
+		</h:panelGrid>
+
+		<h:commandButton value="Cadastrar"
+			action="#{usuarioController.cadastraUsuario}" />
 	</h:form>
-	
-	</h:body>
+
+</h:body>
 
 
 </html>

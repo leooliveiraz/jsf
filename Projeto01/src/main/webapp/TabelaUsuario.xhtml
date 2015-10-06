@@ -8,18 +8,21 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>FormUsuarip</title>
+	<title>Tabela de Usuários no Sistema</title>
 </h:head>
 
 
 
 <h:body>
 	<h:form>
+		<h:commandButton value="Limpar"
+			action="#{logoffController.realizaLogoff()}" />
 		<h:commandButton value="Cadastrar"
 			action="#{usuarioController.consultaUsuario}" />
 		<p:dataTable var="user" value="#{usuarioController.usuarios}">
 			<f:facet name="header">
         List of Cars
+        <p:outputLabel value="#{loginController.cdUsuario}"/>
     </f:facet>
 
 			<p:column headerText="Id">
