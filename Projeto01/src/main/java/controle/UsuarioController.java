@@ -45,19 +45,20 @@ public class UsuarioController {
 			session.getTransaction().commit();
 			session.close();
 			
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Ação Concluída:", "Usuário Salvo."));
+			System.out.println("OK");
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "PrimeFaces Rocks."));
 			return "tabelausuario.xhtml";
 			
 		} 	catch(Exception e){
-			System.out.println(e.getMessage()+",\n"+e.getCause());
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro:", "Problemas para cadastrar o usuario."+e.getMessage()));
+			System.out.println("NÃO");
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "PrimeFaces N Rocks."));
 			//e.printStackTrace();
 
 			return null;
 		}
 
 	}
-	 @PostConstruct
+	@PostConstruct
 	public void consultaUsuario(){
 		try{
 
