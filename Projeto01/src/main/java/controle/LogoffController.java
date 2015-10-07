@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 public class LogoffController {
 	public String realizaLogoff(){
 		try{
+			System.out.println("certo");
 			FacesContext fc = FacesContext.getCurrentInstance();  
 			HttpSession session = (HttpSession)fc.getExternalContext().getSession(false);  
 			session.invalidate();

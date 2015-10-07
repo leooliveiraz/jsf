@@ -48,7 +48,7 @@ public class LoginController {
 			this.dtCadastro = usuario.getDtCadastro();
 			this.senha = usuario.getSenha();
 
-			return "home.xhtml";
+			return "home.xhtml?faces-redirect-true";
 
 
 		} 	catch(Exception e){
@@ -64,9 +64,11 @@ public class LoginController {
 		}
 	}	
 
+	public String redireciona(String pagina){
+		return pagina;
+		
+	}
 	
-
-
 	public String getCdUsuario() {
 		return cdUsuario;
 	}

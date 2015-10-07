@@ -10,60 +10,6 @@
 	<title>Ínicio</title>
 </h:head>
 <body>
-	<h:form>
-		<h:graphicImage library="imagens" name="logo.jpg" width="400"
-			height="50" />
-		<br />
-		<p:growl id="messages" />
-
-		<p:menubar>
-			<p:submenu label="Atendimento" icon="ui-icon-document">				
-				<p:menuitem value="Novo Atendimento" url="TabelaUsuario.xhtml" icon="ui-icon-plusthick" />
-				<p:menuitem value="Vínculo de Tags" url="#" icon="ui-icon-link" />
-				<p:menuitem value="Observações" url="#" icon ="ui-icon-folder-collapsed" />
-				<p:menuitem value="Responsáveis do Paciente" url="#" icon="ui-icon-person" />
-				<p:separator />
-			</p:submenu>
-
-			<p:submenu label="Consultas" icon="ui-icon-document">
-				<p:submenu label="Movimentações">
-					<p:menuitem value="Pacientes por Setor" url="#" />
-					<p:menuitem value="Alertas" url="#" />
-				</p:submenu>
-				<p:menuitem value="Atendimentos" url="#" />
-				<p:separator />
-				<p:menuitem value="Quit" url="#" />
-			</p:submenu>
-
-			<p:submenu label="Tabelas" icon="ui-icon-pencil">
-				<p:menuitem value="Setores" url="#" icon="ui-icon-star" />
-				<p:menuitem value="Tipos de Alerta" url="#" icon="ui-icon-volume-on" />
-				<p:menuitem value="Antenas" url="#" icon="ui-icon-signal-diag" />
-				<p:menuitem value="Tags" url="#" icon="ui-icon-tag" />
-			</p:submenu>
-
-			<p:submenu label="Configurações" icon="ui-icon-gear">
-				<p:submenu label="Usuários" icon="ui-icon-contact">
-					<p:menuitem value="Cadastro de Usuários" url="#" />
-					<p:menuitem value="Liberações de Sistema" url="#" />
-				</p:submenu>
-				<p:menuitem value="Outras Configurações" url="#" />				
-			</p:submenu>			
-			
-
-			<p:submenu label="Ajuda" icon="ui-icon-help">
-					<p:menuitem value="Dados do Sistema" url="#" />
-					<p:menuitem value="Informações" url="#" />				
-			</p:submenu>
-			
-			
-
-			<f:facet name="options">
-				<p:outputLabel value="Usuário: #{loginController.cdUsuario}  "/>
-				<p:commandButton type="button" value="Sair" icon="ui-icon-extlink"
-					action="#{logoffController.realizaLogoff()}" />
-			</f:facet>
-		</p:menubar>
-	</h:form>
+	<ui:include src="/cabecalho.xhtml" />
 </body>
 </html>

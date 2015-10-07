@@ -5,9 +5,11 @@ import static org.junit.Assert.fail;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.hibernate.Session;
@@ -19,7 +21,7 @@ import util.HibernateUtil;
 import util.Utilitarios;
 
 @ManagedBean(name="usuarioController")
-@RequestScoped
+@ViewScoped
 public class UsuarioController {
 
 	private String cdUsuario;
@@ -29,8 +31,9 @@ public class UsuarioController {
 	private Date dtCadastro;
 	private String senha;
 	private List<Usuario> usuarios;
-
-	public void cadastraUsuario(){
+	
+	
+	public String cadastraUsuario(){
 		try{
 
 			Usuario usuario = new Usuario(this.getCdUsuario(), this.getNmUsuario(), this.getCpf(), this.getDtNascimento(), this.getDtNascimento(), Utilitarios.sha256(this.getSenha()));
@@ -38,19 +41,23 @@ public class UsuarioController {
 			session.beginTransaction();
 
 			GenericDao<Usuario> dao = new GenericDao<Usuario>(Usuario.class,session);
-
 			dao.salvar(usuario);
-
 			session.getTransaction().commit();
 			session.close();
+			
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Ação Concluída:", "Usuário Salvo."));
+			return "tabelausuario.xhtml";
+			
 		} 	catch(Exception e){
 			System.out.println(e.getMessage()+",\n"+e.getCause());
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro:", "Problemas para cadastrar o usuario."+e.getMessage()));
 			//e.printStackTrace();
-			fail("Erro ao Salvar");
+
+			return null;
 		}
 
 	}
-
+	 @PostConstruct
 	public void consultaUsuario(){
 		try{
 
@@ -70,7 +77,6 @@ public class UsuarioController {
 		} 	catch(Exception e){
 			System.out.println(e.getMessage()+",\n"+e.getCause());
 			//e.printStackTrace();
-			fail("Erro ao Salvar");
 		}
 	}
 
