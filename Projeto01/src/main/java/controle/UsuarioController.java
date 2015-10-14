@@ -13,6 +13,9 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.hibernate.Session;
+import org.primefaces.event.RowEditEvent;
+import org.primefaces.event.CellEditEvent;
+import org.primefaces.event.RowEditEvent;
 
 import entidades.Usuario;
 import persistencia.DaoUsuario;
@@ -31,7 +34,18 @@ public class UsuarioController {
 	private Date dtCadastro;
 	private String senha;
 	private List<Usuario> usuarios;
-	
+
+
+	public UsuarioController(Usuario usuario) {
+		// TODO Auto-generated constructor stub
+		this.cdUsuario=usuario.getCdUsuario();
+		this.nmUsuario=usuario.getNmUsuario();
+		this.cpf = usuario.getCpf();
+		this.dtNascimento = usuario.getDtNascimento();
+		this.dtCadastro = usuario.getDtCadastro();
+		this.senha	= usuario.getSenha();
+		
+	}
 	
 	public String cadastraUsuario(){
 		try{
@@ -44,20 +58,59 @@ public class UsuarioController {
 			dao.salvar(usuario);
 			session.getTransaction().commit();
 			session.close();
-			
+
 			System.out.println("OK");
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "PrimeFaces Rocks."));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Cadastrado com sucesso."));
 			return "tabelausuario.xhtml";
-			
+
 		} 	catch(Exception e){
-			System.out.println("NÃO");
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "PrimeFaces N Rocks."));
+			System.out.println(e.getMessage());
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Erro:"+e.getMessage()));
 			//e.printStackTrace();
 
-			return null;
+			return "tabelausuario.xhtml";
 		}
 
 	}
+
+	public String alteraUsuario(RowEditEvent event){
+		try{
+
+			Usuario usuario = new Usuario(this.getCdUsuario(), this.getNmUsuario(), this.getCpf(), this.getDtNascimento(), this.getDtNascimento(), Utilitarios.sha256(this.getSenha()));
+			Session session = HibernateUtil.getSession();
+			session.beginTransaction();
+
+			DaoUsuario dao = new DaoUsuario(Usuario.class,session);
+			dao.atualizar(usuario);
+			session.getTransaction().commit();
+			session.close();
+
+			System.out.println("OK");
+
+			FacesMessage msg = new FacesMessage("Editado", ((UsuarioController) event.getObject()).getCdUsuario());
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+
+			return "tabelausuario.xhtml";
+
+		} 	catch(Exception e){
+			System.out.println(e.getMessage());
+			FacesMessage msg = new FacesMessage("Não foi salvo", ((UsuarioController) event.getObject()).getCdUsuario());
+			FacesContext.getCurrentInstance().addMessage(null, msg);//e.printStackTrace();
+
+			return "tabelausuario.xhtml";
+		}
+
+	}
+	public String cancela(RowEditEvent event){
+		FacesMessage msg = new FacesMessage("Cancelado", ((UsuarioController) event.getObject()).getCdUsuario());
+		FacesContext.getCurrentInstance().addMessage(null, msg);//e.printStackTrace();
+		return null;
+
+
+	}
+
+
+
 	@PostConstruct
 	public void consultaUsuario(){
 		try{
@@ -80,7 +133,10 @@ public class UsuarioController {
 			//e.printStackTrace();
 		}
 	}
-
+	public void onRowCancel(RowEditEvent event) {
+		FacesMessage msg = new FacesMessage("Cancelado Edicao", ((UsuarioController) event.getObject()).getCdUsuario());
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
 
 
 	public String getCdUsuario() {

@@ -7,23 +7,25 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-<title>Tela de Login</title>
+	<title>Tela de Login</title>
 </h:head>
 <h:body>
 	<h:form prependId="false">
-		<p:dialog header="Login #{loginController.cdUsuario}" modal="true" closable="false"
-			position="center" widgetVar="modalLogin" minWidth="300" width="300"
-			showEffect="slide" draggable="false" resizable="false" visible="true">
+		<p:dialog header="Login #{loginController.cdUsuario}" modal="true"
+			closable="false" position="center" widgetVar="modalLogin"
+			minWidth="300" width="300" showEffect="slide" draggable="false"
+			resizable="false" visible="true">
 			<center>
-				<p:messages id="mensagens" showDetail="true" showSummary="true" />
+				<p:messages id="mensagens" showDetail="true" showSummary="false" />
 				<h:panelGrid columns="2">
 					<h:outputLabel value="Login" />
-					<h:inputText  size="15" value="#{loginController.cdUsuario}" />
+					<h:inputText size="15" value="#{loginController.cdUsuario}" />
 					<h:outputLabel value="Senha" />
-					<h:inputSecret  size="15" value="#{loginController.senha}" />
+					<h:inputSecret size="15" value="#{loginController.senha}" />
 				</h:panelGrid>
 				<br />
-				<h:commandButton value="Entrar" action="#{loginController.realizaLogin()}" />
+				<h:commandButton value="Entrar"
+					action="#{loginController.realizaLogin()}" />
 			</center>
 		</p:dialog>
 	</h:form>

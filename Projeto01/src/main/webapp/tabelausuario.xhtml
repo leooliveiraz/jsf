@@ -19,12 +19,10 @@
 
 	<h:form>
 
-		<p:messages id="messages" showDetail="true" autoUpdate="true"
-			closable="true" />
-		<p:commandButton type="button" value="Limpar"
-			action="home.xhtml?faces-redirect=true" />
+		
 		<p:commandButton value="Cadastrar"
 			action="cadastrousuario.xhtml?faces-redirect=true" />
+			
 		<p:messages id="mensagens" showDetail="true" showSummary="false" />
 
 		<p:dataTable var="usuario" value="#{usuarioController.usuarios}">
@@ -50,9 +48,11 @@
 			</p:column>
 
 			<p:column headerText="Opções">
-				<p:commandButton type="button" value="Editar" icon="ui-icon-pencil"
+				<p:commandButton type="button" id="teste" value="Editar" icon="ui-icon-pencil"
 					action="home.xhtml?faces-redirect=true" />
+				
 			</p:column>
+
 		</p:dataTable>
 	</h:form>
 </h:body>

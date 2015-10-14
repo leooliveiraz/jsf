@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<h:body>
+	<h:form id="form">
+		<p:growl id="msgs" showDetail="true" />
+
+		<p:dataTable id="usuarios" var="teste" value="#{usuarioController.usuarios}"
+			editable="true" style="margin-bottom:20px">
+			<f:facet name="header">
+           Row Editing
+       </f:facet>
+
+			<p:ajax event="rowEdit" listener="#{usuarioController.alteraUsuario}"	update=":form:msgs" />
+			<p:ajax event="rowEditCancel" listener="#{usuarioController.cancela}"	update=":form:msgs" />
+
+			<p:column headerText="Login">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{teste.cdUsuario}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText  value="#{teste.cdUsuario}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Nome">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{teste.nmUsuario}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText  value="#{teste.nmUsuario}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="CPF">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{teste.cpf}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText  value="#{teste.cpf}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Data de Nascimento">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{teste.dtNascimento}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:calendar value="#{teste.dtNascimento}" locale="pt_BR"
+						navigator="true" pattern="yyyy-mm-dd" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+			
+			<p:column headerText="Data de Cadastro">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{teste.dtCadastro}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:calendar value="#{teste.dtCadastro}" locale="pt_BR"
+						navigator="true" pattern="yyyy-mm-dd" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column style="width:32px">
+				<p:rowEditor />
+			</p:column>
+		</p:dataTable>
+
+		
+	</h:form>
+</h:body>
+</html>
