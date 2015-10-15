@@ -19,38 +19,46 @@
 
 	<h:form>
 
-		
+
 		<p:commandButton value="Cadastrar"
 			action="cadastrousuario.xhtml?faces-redirect=true" />
-			
+
 		<p:messages id="mensagens" showDetail="true" showSummary="false" />
 
-		<p:dataTable var="usuario" value="#{usuarioController.usuarios}">
+		<p:dataTable var="usuario" value="#{usuarioController.usuarios}"
+			rows = "10"
+			paginator="true"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="10,25,50">
 			<f:facet name="header">Lista de Usuários</f:facet>
-			<p:column headerText="Usuário">
+			<p:column headerText="Usuário" sortBy="#{usuario.cdUsuario}">
 				<h:outputText value="#{usuario.cdUsuario}" />
 			</p:column>
 
-			<p:column headerText="Nome">
+			<p:column headerText="Nome" sortBy="#{usuario.nmUsuario}">
 				<h:outputText value="#{usuario.nmUsuario}" />
 			</p:column>
 
-			<p:column headerText="CPF">
+			<p:column headerText="CPF" sortBy="#{usuario.cpf}">
 				<h:outputText value="#{usuario.cpf}" />
 			</p:column>
 
-			<p:column headerText="Data de Nascimento">
+			<p:column headerText="Data de Nascimento" sortBy="#{usuario.dtNascimento}">
 				<h:outputText value="#{usuario.dtNascimento}" />
 			</p:column>
 
-			<p:column headerText="Data de Cadastro">
+			<p:column headerText="Data de Cadastro" sortBy="#{usuario.dtCadastro}">
 				<h:outputText value="#{usuario.dtCadastro}" />
 			</p:column>
 
 			<p:column headerText="Opções">
-				<p:commandButton type="button" id="teste" value="Editar" icon="ui-icon-pencil"
-					action="home.xhtml?faces-redirect=true" />
-				
+				<p:commandButton type="button" id="teste" value="Editar"
+					icon="ui-icon-pencil" action="#{usuarioController.alteraUsuario()}" >
+					<f:setPropertyActionListener target="#{usuarioController.usuario}"
+                                           value="#{usuario}"
+                                           for="teste"/>				
+			</p:commandButton>
+
 			</p:column>
 
 		</p:dataTable>

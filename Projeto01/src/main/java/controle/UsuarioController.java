@@ -2,6 +2,7 @@ package controle;
 
 import static org.junit.Assert.fail;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -25,8 +26,15 @@ import util.Utilitarios;
 
 @ManagedBean(name="usuarioController")
 @ViewScoped
-public class UsuarioController {
+public class UsuarioController implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
 	private String cdUsuario;
 	private String nmUsuario;
 	private String cpf;
@@ -34,17 +42,11 @@ public class UsuarioController {
 	private Date dtCadastro;
 	private String senha;
 	private List<Usuario> usuarios;
+	private Usuario usuario;
 
 
-	public UsuarioController(Usuario usuario) {
+	public UsuarioController()  {
 		// TODO Auto-generated constructor stub
-		this.cdUsuario=usuario.getCdUsuario();
-		this.nmUsuario=usuario.getNmUsuario();
-		this.cpf = usuario.getCpf();
-		this.dtNascimento = usuario.getDtNascimento();
-		this.dtCadastro = usuario.getDtCadastro();
-		this.senha	= usuario.getSenha();
-		
 	}
 	
 	public String cadastraUsuario(){
@@ -115,7 +117,6 @@ public class UsuarioController {
 	public void consultaUsuario(){
 		try{
 
-			Usuario usuario = new Usuario(this.getCdUsuario(), this.getNmUsuario(), this.getCpf(), this.getDtNascimento(), this.getDtNascimento(), this.getSenha());
 			Session session = HibernateUtil.getSession();
 			session.beginTransaction();
 
@@ -200,6 +201,20 @@ public class UsuarioController {
 
 	public List<Usuario> getUsuarios(){
 		return usuarios;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+		this.cdUsuario = usuario.getCdUsuario();
+		this.nmUsuario = usuario.getNmUsuario();
+		this.cpf = usuario.getCpf();
+		this.dtCadastro = usuario.getDtCadastro();
+		this.dtNascimento = usuario.getDtNascimento();
+		this.senha = usuario.getSenha();
 	}
 
 }
