@@ -1,7 +1,5 @@
 package controle;
 
-import static org.junit.Assert.fail;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -9,15 +7,12 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.hibernate.Session;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.event.CellEditEvent;
-import org.primefaces.event.RowEditEvent;
-
 import entidades.Usuario;
 import persistencia.DaoUsuario;
 import persistencia.GenericDao;
@@ -75,10 +70,9 @@ public class UsuarioController implements Serializable {
 
 	}
 
-	public String alteraUsuario(RowEditEvent event){
+	public void alteraUsuario(Usuario usuario){
 		try{
 
-			Usuario usuario = new Usuario(this.getCdUsuario(), this.getNmUsuario(), this.getCpf(), this.getDtNascimento(), this.getDtNascimento(), Utilitarios.sha256(this.getSenha()));
 			Session session = HibernateUtil.getSession();
 			session.beginTransaction();
 
@@ -89,28 +83,13 @@ public class UsuarioController implements Serializable {
 
 			System.out.println("OK");
 
-			FacesMessage msg = new FacesMessage("Editado", ((UsuarioController) event.getObject()).getCdUsuario());
-			FacesContext.getCurrentInstance().addMessage(null, msg);
-
-			return "tabelausuario.xhtml";
 
 		} 	catch(Exception e){
 			System.out.println(e.getMessage());
-			FacesMessage msg = new FacesMessage("Não foi salvo", ((UsuarioController) event.getObject()).getCdUsuario());
-			FacesContext.getCurrentInstance().addMessage(null, msg);//e.printStackTrace();
-
-			return "tabelausuario.xhtml";
+			
 		}
 
 	}
-	public String cancela(RowEditEvent event){
-		FacesMessage msg = new FacesMessage("Cancelado", ((UsuarioController) event.getObject()).getCdUsuario());
-		FacesContext.getCurrentInstance().addMessage(null, msg);//e.printStackTrace();
-		return null;
-
-
-	}
-
 
 
 	@PostConstruct
@@ -134,11 +113,6 @@ public class UsuarioController implements Serializable {
 			//e.printStackTrace();
 		}
 	}
-	public void onRowCancel(RowEditEvent event) {
-		FacesMessage msg = new FacesMessage("Cancelado Edicao", ((UsuarioController) event.getObject()).getCdUsuario());
-		FacesContext.getCurrentInstance().addMessage(null, msg);
-	}
-
 
 	public String getCdUsuario() {
 		return cdUsuario;
@@ -217,4 +191,15 @@ public class UsuarioController implements Serializable {
 		this.senha = usuario.getSenha();
 	}
 
+	public void onRowEdit(RowEditEvent event) {
+		alteraUsuario(((Usuario) event.getObject()));
+        FacesMessage msg = new FacesMessage("Registro editado", ((Usuario) event.getObject()).getCdUsuario());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+     
+    public void onRowCancel(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Edição cancelada", ((Usuario) event.getObject()).getCdUsuario());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }     
+	
 }
