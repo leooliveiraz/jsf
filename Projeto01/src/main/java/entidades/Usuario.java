@@ -1,14 +1,16 @@
 package entidades;
 
-// Generated 01/09/2015 00:07:35 by Hibernate Tools 4.0.0
+// Generated 17/10/2015 19:11:37 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -26,8 +28,17 @@ public class Usuario implements java.io.Serializable {
 	private Date dtNascimento;
 	private Date dtCadastro;
 	private String senha;
+	private Set autorizacaoSaidas = new HashSet(0);
+	private Set usuarioHasModulos = new HashSet(0);
+	private Set atendimentos = new HashSet(0);
 
-	public Usuario() {
+	public Usuario(String cdUsuario, String nmUsuario, String cpf, Date dtNascimento, Date dtCadastro, String senha) {
+		this.cdUsuario = cdUsuario;
+		this.nmUsuario = nmUsuario;
+		this.cpf = cpf;
+		this.dtNascimento = dtNascimento;
+		this.dtCadastro = dtCadastro;
+		this.senha = senha;
 	}
 
 	public Usuario(String cdUsuario, String senha) {
@@ -36,13 +47,21 @@ public class Usuario implements java.io.Serializable {
 	}
 
 	public Usuario(String cdUsuario, String nmUsuario, String cpf,
-			Date dtNascimento, Date dtCadastro, String senha) {
+			Date dtNascimento, Date dtCadastro, String senha,
+			Set autorizacaoSaidas, Set usuarioHasModulos, Set atendimentos) {
 		this.cdUsuario = cdUsuario;
 		this.nmUsuario = nmUsuario;
 		this.cpf = cpf;
 		this.dtNascimento = dtNascimento;
 		this.dtCadastro = dtCadastro;
 		this.senha = senha;
+		this.autorizacaoSaidas = autorizacaoSaidas;
+		this.usuarioHasModulos = usuarioHasModulos;
+		this.atendimentos = atendimentos;
+	}
+
+	public Usuario() {
+		// TODO Auto-generated constructor stub
 	}
 
 	@Id
@@ -101,6 +120,32 @@ public class Usuario implements java.io.Serializable {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
-	
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
+	public Set getAutorizacaoSaidas() {
+		return this.autorizacaoSaidas;
+	}
+
+	public void setAutorizacaoSaidas(Set autorizacaoSaidas) {
+		this.autorizacaoSaidas = autorizacaoSaidas;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
+	public Set getUsuarioHasModulos() {
+		return this.usuarioHasModulos;
+	}
+
+	public void setUsuarioHasModulos(Set usuarioHasModulos) {
+		this.usuarioHasModulos = usuarioHasModulos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
+	public Set getAtendimentos() {
+		return this.atendimentos;
+	}
+
+	public void setAtendimentos(Set atendimentos) {
+		this.atendimentos = atendimentos;
+	}
+
 }

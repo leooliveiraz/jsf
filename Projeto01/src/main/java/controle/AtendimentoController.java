@@ -106,14 +106,7 @@ public class AtendimentoController {
 	
 	public String cadastraAtendimento(){
 		try {
-			Atendimento atendimento = new Atendimento(this.cdAtendimento, 
-					  this.cdAutorizacaoSaida,
-					  this.cdPaciente,
-					  this.dtAtendimento,
-					  this.dtAutorizacaoSaida,
-					  this.cdUsuarioSaida,
-					  this.cdUsuarioEntrada,
-					  this.usuarioCdUsuario);
+			Atendimento atendimento = new Atendimento(this.cdAtendimento,);
 	
 			Session session = HibernateUtil.getSession();
 			session.beginTransaction();

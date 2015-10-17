@@ -1,12 +1,15 @@
 package entidades;
 
-// Generated 01/09/2015 00:07:35 by Hibernate Tools 4.0.0
+// Generated 17/10/2015 19:11:37 by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -17,17 +20,20 @@ import javax.persistence.Table;
 public class Alertas implements java.io.Serializable {
 
 	private AlertasId id;
+	private TipoAlerta tipoAlerta;
 	private Integer cdMovimentacao;
 
 	public Alertas() {
 	}
 
-	public Alertas(AlertasId id) {
+	public Alertas(AlertasId id, TipoAlerta tipoAlerta) {
 		this.id = id;
+		this.tipoAlerta = tipoAlerta;
 	}
 
-	public Alertas(AlertasId id, Integer cdMovimentacao) {
+	public Alertas(AlertasId id, TipoAlerta tipoAlerta, Integer cdMovimentacao) {
 		this.id = id;
+		this.tipoAlerta = tipoAlerta;
 		this.cdMovimentacao = cdMovimentacao;
 	}
 
@@ -41,6 +47,16 @@ public class Alertas implements java.io.Serializable {
 
 	public void setId(AlertasId id) {
 		this.id = id;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "tipo_alerta_cd_tipo_alerta", nullable = false, insertable = false, updatable = false)
+	public TipoAlerta getTipoAlerta() {
+		return this.tipoAlerta;
+	}
+
+	public void setTipoAlerta(TipoAlerta tipoAlerta) {
+		this.tipoAlerta = tipoAlerta;
 	}
 
 	@Column(name = "cd_movimentacao")

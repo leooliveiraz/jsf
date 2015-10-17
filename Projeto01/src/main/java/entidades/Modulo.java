@@ -1,10 +1,14 @@
 package entidades;
 
-// Generated 01/09/2015 00:07:35 by Hibernate Tools 4.0.0
+// Generated 17/10/2015 19:11:37 by Hibernate Tools 3.4.0.CR1
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -17,6 +21,7 @@ public class Modulo implements java.io.Serializable {
 	private int cdModulo;
 	private String dsModulo;
 	private String detalhe;
+	private Set usuarioHasModulos = new HashSet(0);
 
 	public Modulo() {
 	}
@@ -25,10 +30,12 @@ public class Modulo implements java.io.Serializable {
 		this.cdModulo = cdModulo;
 	}
 
-	public Modulo(int cdModulo, String dsModulo, String detalhe) {
+	public Modulo(int cdModulo, String dsModulo, String detalhe,
+			Set usuarioHasModulos) {
 		this.cdModulo = cdModulo;
 		this.dsModulo = dsModulo;
 		this.detalhe = detalhe;
+		this.usuarioHasModulos = usuarioHasModulos;
 	}
 
 	@Id
@@ -57,6 +64,15 @@ public class Modulo implements java.io.Serializable {
 
 	public void setDetalhe(String detalhe) {
 		this.detalhe = detalhe;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "modulo")
+	public Set getUsuarioHasModulos() {
+		return this.usuarioHasModulos;
+	}
+
+	public void setUsuarioHasModulos(Set usuarioHasModulos) {
+		this.usuarioHasModulos = usuarioHasModulos;
 	}
 
 }

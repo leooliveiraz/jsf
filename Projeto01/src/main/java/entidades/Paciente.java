@@ -1,11 +1,15 @@
 package entidades;
 
-// Generated 01/09/2015 00:07:35 by Hibernate Tools 4.0.0
+// Generated 17/10/2015 19:11:37 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -31,6 +35,8 @@ public class Paciente implements java.io.Serializable {
 	private String cidade;
 	private String uf;
 	private String observacao;
+	private Set responsavelPacientes = new HashSet(0);
+	private Set atendimentos = new HashSet(0);
 
 	public Paciente() {
 	}
@@ -42,7 +48,8 @@ public class Paciente implements java.io.Serializable {
 	public Paciente(int cdPaciente, String nmPaciente, String cpf,
 			Date dtNascimento, String sexo, String nmMae, String nmPai,
 			String cep, String logradouro, Integer numero, String complemento,
-			String cidade, String uf, String observacao) {
+			String cidade, String uf, String observacao,
+			Set responsavelPacientes, Set atendimentos) {
 		this.cdPaciente = cdPaciente;
 		this.nmPaciente = nmPaciente;
 		this.cpf = cpf;
@@ -57,6 +64,8 @@ public class Paciente implements java.io.Serializable {
 		this.cidade = cidade;
 		this.uf = uf;
 		this.observacao = observacao;
+		this.responsavelPacientes = responsavelPacientes;
+		this.atendimentos = atendimentos;
 	}
 
 	@Id
@@ -185,6 +194,24 @@ public class Paciente implements java.io.Serializable {
 
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "paciente")
+	public Set getResponsavelPacientes() {
+		return this.responsavelPacientes;
+	}
+
+	public void setResponsavelPacientes(Set responsavelPacientes) {
+		this.responsavelPacientes = responsavelPacientes;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "paciente")
+	public Set getAtendimentos() {
+		return this.atendimentos;
+	}
+
+	public void setAtendimentos(Set atendimentos) {
+		this.atendimentos = atendimentos;
 	}
 
 }

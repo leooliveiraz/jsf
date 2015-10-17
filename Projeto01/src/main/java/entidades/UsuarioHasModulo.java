@@ -1,12 +1,15 @@
 package entidades;
 
-// Generated 01/09/2015 00:07:35 by Hibernate Tools 4.0.0
+// Generated 17/10/2015 19:11:37 by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -17,12 +20,17 @@ import javax.persistence.Table;
 public class UsuarioHasModulo implements java.io.Serializable {
 
 	private UsuarioHasModuloId id;
+	private Modulo modulo;
+	private Usuario usuario;
 
 	public UsuarioHasModulo() {
 	}
 
-	public UsuarioHasModulo(UsuarioHasModuloId id) {
+	public UsuarioHasModulo(UsuarioHasModuloId id, Modulo modulo,
+			Usuario usuario) {
 		this.id = id;
+		this.modulo = modulo;
+		this.usuario = usuario;
 	}
 
 	@EmbeddedId
@@ -35,6 +43,26 @@ public class UsuarioHasModulo implements java.io.Serializable {
 
 	public void setId(UsuarioHasModuloId id) {
 		this.id = id;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "modulo_cd_modulo", nullable = false, insertable = false, updatable = false)
+	public Modulo getModulo() {
+		return this.modulo;
+	}
+
+	public void setModulo(Modulo modulo) {
+		this.modulo = modulo;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "usuario_cd_usuario", nullable = false, insertable = false, updatable = false)
+	public Usuario getUsuario() {
+		return this.usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 }

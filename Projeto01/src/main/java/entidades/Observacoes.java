@@ -1,12 +1,13 @@
 package entidades;
 
-// Generated 01/09/2015 00:07:35 by Hibernate Tools 4.0.0
+// Generated 17/10/2015 19:11:37 by Hibernate Tools 3.4.0.CR1
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -16,33 +17,43 @@ import javax.persistence.Table;
 @Table(name = "observacoes", catalog = "rfid_maternidade")
 public class Observacoes implements java.io.Serializable {
 
-	private ObservacoesId id;
+	private int cdObservacao;
+	private Atendimento atendimento;
 	private String dsObservacao;
 
 	public Observacoes() {
 	}
 
-	public Observacoes(ObservacoesId id) {
-		this.id = id;
+	public Observacoes(int cdObservacao, Atendimento atendimento) {
+		this.cdObservacao = cdObservacao;
+		this.atendimento = atendimento;
 	}
 
-	public Observacoes(ObservacoesId id, String dsObservacao) {
-		this.id = id;
+	public Observacoes(int cdObservacao, Atendimento atendimento,
+			String dsObservacao) {
+		this.cdObservacao = cdObservacao;
+		this.atendimento = atendimento;
 		this.dsObservacao = dsObservacao;
 	}
 
-	@EmbeddedId
-	@AttributeOverrides({
-			@AttributeOverride(name = "cdObservacao", column = @Column(name = "cd_observacao", nullable = false)),
-			@AttributeOverride(name = "cdAtendimento", column = @Column(name = "cd_atendimento", nullable = false)),
-			@AttributeOverride(name = "cdAutorizacaoSaida", column = @Column(name = "cd_autorizacao_saida", nullable = false)),
-			@AttributeOverride(name = "cdPaciente", column = @Column(name = "cd_paciente", nullable = false)) })
-	public ObservacoesId getId() {
-		return this.id;
+	@Id
+	@Column(name = "cd_observacao", unique = true, nullable = false)
+	public int getCdObservacao() {
+		return this.cdObservacao;
 	}
 
-	public void setId(ObservacoesId id) {
-		this.id = id;
+	public void setCdObservacao(int cdObservacao) {
+		this.cdObservacao = cdObservacao;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "cd_atendimento", nullable = false)
+	public Atendimento getAtendimento() {
+		return this.atendimento;
+	}
+
+	public void setAtendimento(Atendimento atendimento) {
+		this.atendimento = atendimento;
 	}
 
 	@Column(name = "ds_observacao", length = 1000)
