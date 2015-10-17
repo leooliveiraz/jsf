@@ -8,7 +8,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>Tabela de Usuários no Sistema</title>
+	<title>Tabela de Setores no Sistema</title>
 </h:head>
 
 
@@ -21,30 +21,27 @@
 		<p:growl id="msgs" showDetail="true" />
 
 		<p:commandButton value="Cadastrar"
-			action="cadastrousuario.xhtml?faces-redirect=true" />
-		<p:dataTable id="usuarios" var="usuario"
-			value="#{usuarioController.usuarios}" editable="true"
-			style="margin-bottom:20px"
-			rows = "10"
-			paginator="true"
+			action="cadastrosetor.xhtml?faces-redirect=true" />
+		<p:dataTable id="setores" var="setor" value="#{setorController.lista}"
+			editable="true" style="margin-bottom:20px" rows="10" paginator="true"
 			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 			rowsPerPageTemplate="10,25,50">
 			<f:facet name="header">
            Lista de Usuários
        </f:facet>
 
-			<p:ajax event="rowEdit" listener="#{usuarioController.onRowEdit}"
+			<p:ajax event="rowEdit" listener="#{setorController.onRowEdit}"
 				update=":form:msgs" />
 			<p:ajax event="rowEditCancel"
-				listener="#{usuarioController.onRowCancel}" update=":form:msgs" />
+				listener="#{setorController.onRowCancel}" update=":form:msgs" />
 
-			<p:column headerText="Usuário">
+			<p:column headerText="Código">
 				<p:cellEditor>
 					<f:facet name="output">
-						<h:outputText value="#{usuario.cdUsuario}" />
+						<h:outputText value="#{setor.cdSetor}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText id="modelInput" value="#{usuario.cdUsuario}"
+						<p:inputText id="modelInput" value="#{setor.cdSetor}"
 							style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
@@ -53,45 +50,35 @@
 			<p:column headerText="Nome">
 				<p:cellEditor>
 					<f:facet name="output">
-						<h:outputText value="#{usuario.nmUsuario}" />
+						<h:outputText value="#{setor.nmSetor}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText value="#{usuario.nmUsuario}" style="width:100%"
-							label="Year" />
+						<p:inputText value="#{setor.nmSetor}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
 
-			<p:column headerText="CPF">
+			<p:column headerText="Ativo">
 				<p:cellEditor>
 					<f:facet name="output">
-						<h:outputText value="#{usuario.cpf}" />
+						<h:outputText value="#{setor.snAtivo}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText value="#{usuario.cpf}" style="width:100%"
-							label="Year" />
+						<p:selectOneMenu id="Ativo" value="#{setor.snAtivo}"
+							style="width:125px">
+							<f:selectItem itemLabel="SIM" itemValue="S" />
+							<f:selectItem itemLabel="NÃO" itemValue="N" />
+						</p:selectOneMenu>
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
 
-			<p:column headerText="Data Nascimento">
-				<p:cellEditor>
-					<f:facet name="output">
-						<h:outputText value="#{usuario.dtNascimento}" />
-					</f:facet>
-					<f:facet name="input">
-						<p:calendar id="german" value="#{usuario.dtNascimento}"
-							locale="pt_BR" navigator="true" pattern="dd/mm/yyyy" />
-					</f:facet>
-				</p:cellEditor>
-			</p:column>
 
 
 			<p:column style="width:32px">
 				<p:rowEditor />
 			</p:column>
 		</p:dataTable>
-
 	</h:form>
 </h:body>
 

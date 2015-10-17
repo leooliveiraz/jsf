@@ -13,8 +13,27 @@ import util.Utilitarios;
 import entidades.Usuario;
 
 public class DaoUsuarioTest {
+	@Test
+	public void testSalvar() {
+		try{
+			Session session = HibernateUtil.getSession();
+			session.beginTransaction();
+			Usuario dto = new Usuario("LPROCHA","LEONARDO ROCHA ","40570094852",new Date(),new Date(),Utilitarios.sha256("teste"));
+			GenericDao<Usuario> dao = new GenericDao<Usuario>(Usuario.class,session);		
+			dao.salvar(dto);
+			System.out.println("Salvo" + dto);
+			session.getTransaction().commit();
+			session.close();
+		}
+		catch(Exception e){
+			System.out.println(e.getMessage()+",\n"+e.getCause());
+			//e.printStackTrace();
+			fail("Erro ao Salvar");
+		}
+	}
+	
 
-
+	/*
 	@Test
 	public void testBuscaLogin() {
 		try{
@@ -35,7 +54,6 @@ public class DaoUsuarioTest {
 	}
 	
 
-	/*
 	 * 
 		@Test
 	public void testSalvar() {

@@ -12,7 +12,6 @@ import javax.faces.context.FacesContext;
 
 import org.hibernate.Session;
 import org.primefaces.event.RowEditEvent;
-import org.primefaces.event.CellEditEvent;
 import entidades.Usuario;
 import persistencia.DaoUsuario;
 import persistencia.GenericDao;

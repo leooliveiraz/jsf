@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Tabela de Usuários no Sistema</title>
+</h:head>
+
+
+
+<h:body>
+
+	<ui:include src="/cabecalho.xhtml" />
+
+	<h:form>
+
+		<p:commandButton value="Cadastrar"
+			action="cadastrousuario.xhtml?faces-redirect=true" />
+
+		<p:messages id="mensagens" showDetail="true" showSummary="false" />
+
+		<p:dataTable var="usuario" value="#{usuarioController.usuarios}"
+			rows = "10"
+			paginator="true"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="10,25,50">
+			<f:facet name="header">Lista de Usuários</f:facet>
+			<p:column headerText="Usuário" sortBy="#{usuario.cdUsuario}">
+				<h:outputText value="#{usuario.cdUsuario}" />
+			</p:column>
+
+			<p:column headerText="Nome" sortBy="#{usuario.nmUsuario}">
+				<h:outputText value="#{usuario.nmUsuario}" />
+			</p:column>
+
+			<p:column headerText="CPF" sortBy="#{usuario.cpf}">
+				<h:outputText value="#{usuario.cpf}" />
+			</p:column>
+
+			<p:column headerText="Data de Nascimento" sortBy="#{usuario.dtNascimento}">
+				<h:outputText value="#{usuario.dtNascimento}" />
+			</p:column>
+
+			<p:column headerText="Data de Cadastro" sortBy="#{usuario.dtCadastro}">
+				<h:outputText value="#{usuario.dtCadastro}" />
+			</p:column>
+
+			<p:column headerText="Opções">
+				<p:commandButton type="button" id="teste" value="Editar"
+					icon="ui-icon-pencil" action="#{usuarioController.alteraUsuario()}" >
+					<f:setPropertyActionListener target="#{usuarioController.usuario}"
+                                           value="#{usuario}"
+                                           for="teste"/>				
+				</p:commandButton>
+			</p:column>
+
+		</p:dataTable>
+	</h:form>
+</h:body>
+
+
+</html>
