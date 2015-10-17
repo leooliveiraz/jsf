@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Tabela de Atendimento no Sistema</title>
+</h:head>
+
+<h:body>
+
+	<ui:include src="/cabecalho.xhtml" />
+	
+	<h:form id="form">
+		<p:growl id="msgs" showDetail="true" />
+
+		<p:commandButton value="Cadastrar"
+			action="cadastroatendimento.xhtml?faces-redirect=true" />
+		<p:dataTable id="atendimentos" var="atendimento"
+			value="#{atendimentoController.atendimentos}" editable="true"
+			style="margin-bottom:20px"
+			rows = "10"
+			paginator="true"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="10,25,50">
+			<f:facet name="header">
+           Lista de Atendimentos
+       </f:facet>
+       
+	       <p:ajax event="rowEdit" listener="#{atendimentoController.onRowEdit}"
+					update=":form:msgs" />
+			<p:ajax event="rowEditCancel"
+				listener="#{atendimentoController.onRowCancel}" update=":form:msgs" />
+						
+				<p:column headerText="Atendimento" sortBy="#{atendimento.cdAtendimento}" filterBy="#{atendimento.cdAtendimento}" >
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{atendimento.cdAtendimento}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText id="modelInput" value="#{atendimento.cdAtendimento}"
+									style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+				</p:column>
+				
+				<p:column headerText="Autorizacao de Saida" sortBy="#{atendimento.cdAutorizacaoSaida}" filterBy="#{atendimento.cdAutorizacaoSaida}" > 
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{atendimento.cdAutorizacaoSaida}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{atendimento.cdAutorizacaoSaida}" style="width:100%"
+									label="Year" />
+							</f:facet>
+						</p:cellEditor>
+				</p:column>
+			
+			
+				<p:column headerText="Data da Autorizacao" sortBy="#{atendimento.dtAutorizacaoSaida}" filterBy="#{atendimento.dtAutorizacaoSaida}" >
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{atendimento.dtAutorizacaoSaida}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:calendar id="german" value="#{atendimento.dtAutorizacaoSaida}"
+									locale="pt_BR" navigator="true" pattern="dd/mm/yyyy" />
+							</f:facet>
+						</p:cellEditor>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+</h:body>
+
+</html>

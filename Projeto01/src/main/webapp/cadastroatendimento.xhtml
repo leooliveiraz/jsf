@@ -1,18 +1,63 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:rich="http://richfaces.org/rich"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:a4j="http://richfaces.org/a4j"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
-<h:head></h:head> 
-<body>
-    <rich:panel>
-        <f:facet name="header">
-        Write your own custom rich components with built-in AJAX support
-        </f:facet>
-		<h:outputText value="Panel Body" /> 
-	</rich:panel>
-</body> 
+<h:head>
+	<title>Cadastro de Atendimento</title>
+</h:head>
+
+<h:body>
+
+	<ui:include src="/cabecalho.xhtml" />
+	<h:form>
+
+
+		<p:panel header="Cadastro de Atendimento" style="margin-bottom:20px">
+			
+		<p:messages id="mensagens" showDetail="true" showSummary="false" />
+
+
+			<h:panelGrid columns="2">
+				<p:outputLabel value="Atendimento:" />
+				<p:inputText value="#{atendimentoController.cdAtendimento}" />
+
+				<p:outputLabel value="Autorizacao de Saida:" />
+				<p:inputText value="#{atendimentoController.cdAutorizacaoSaida}" />
+
+				<p:outputLabel value="Paciente:" />
+				<p:inputText value="#{atendimentoController.cdPaciente}" />
+
+				<p:outputLabel for="german" value="Data do Atendimento" />
+				<p:calendar id="german" value="#{atendimentoController.dtAtendimento}"
+					locale="pt_BR" navigator="true" pattern="dd/mm/yyyy" />
+
+				<p:outputLabel for="german" value="Data Autorizacao de Saida" />
+				<p:calendar value="#{atendimentoController.dtAutorizacaoSaida}" locale="pt_BR"
+					navigator="true" pattern="dd/mm/yyyy" />
+
+				<p:outputLabel value="Usuario de Saida:" />
+				<p:password id="senha" value="#{atendimentoController.cdUsuarioSaida}" />
+				
+				<p:outputLabel value="Usuario de Entrada:" />
+				<p:password id="senha" value="#{atendimentoController.cdUsuarioEntrada}" />
+				
+				<p:outputLabel value="Usuario:" />
+				<p:password id="senha" value="#{atendimentoController.usuarioCdUsuario}" />
+
+
+				<p:commandButton value="Cadastrar"
+					action="#{atendimentoController.cadastraAtendimento()}" />
+				<p:commandButton value="Limpar" 
+					action="cadastroatendimento.xhtml?faces-redirect=true" />
+
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+
+</h:body>
 </html>
