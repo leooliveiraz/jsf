@@ -35,7 +35,7 @@
 			<p:ajax event="rowEditCancel"
 				listener="#{setorController.onRowCancel}" update=":form:msgs" />
 
-			<p:column headerText="Código">
+			<p:column headerText="Código" sortBy="#{setor.cdSetor}" filterBy="#{setor.cdSetor}">
 				<p:cellEditor>
 					<f:facet name="output">
 						<h:outputText value="#{setor.cdSetor}" />
@@ -47,7 +47,7 @@
 				</p:cellEditor>
 			</p:column>
 
-			<p:column headerText="Nome">
+			<p:column headerText="Nome" sortBy="#{setor.nmSetor}" filterBy="#{setor.nmSetor}">
 				<p:cellEditor>
 					<f:facet name="output">
 						<h:outputText value="#{setor.nmSetor}" />
@@ -58,13 +58,13 @@
 				</p:cellEditor>
 			</p:column>
 
-			<p:column headerText="Ativo">
+			<p:column headerText="Ativo" sortBy="#{setor.snAtivo}" filterBy="#{setor.snAtivo}">
 				<p:cellEditor>
 					<f:facet name="output">
 						<h:outputText value="#{setor.snAtivo}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:selectOneMenu id="Ativo" value="#{setor.snAtivo}"
+						<p:selectOneMenu id="Ativo" value="#{setor.snAtivo}" 
 							style="width:125px">
 							<f:selectItem itemLabel="SIM" itemValue="S" />
 							<f:selectItem itemLabel="NÃO" itemValue="N" />

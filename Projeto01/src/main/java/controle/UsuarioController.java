@@ -75,6 +75,9 @@ public class UsuarioController implements Serializable {
 			Session session = HibernateUtil.getSession();
 			session.beginTransaction();
 
+			usuario.getCdUsuario().toUpperCase();
+			usuario.getNmUsuario().toUpperCase();
+			usuario.getCpf().toUpperCase();
 			DaoUsuario dao = new DaoUsuario(Usuario.class,session);
 			dao.atualizar(usuario);
 			session.getTransaction().commit();

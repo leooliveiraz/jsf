@@ -38,7 +38,7 @@
 			<p:ajax event="rowEditCancel"
 				listener="#{usuarioController.onRowCancel}" update=":form:msgs" />
 
-			<p:column headerText="Usuário">
+			<p:column headerText="Usuário" sortBy="#{usuario.cdUsuario}" filterBy="#{usuario.cdUsuario}" >
 				<p:cellEditor>
 					<f:facet name="output">
 						<h:outputText value="#{usuario.cdUsuario}" />
@@ -50,7 +50,7 @@
 				</p:cellEditor>
 			</p:column>
 
-			<p:column headerText="Nome">
+			<p:column headerText="Nome" sortBy="#{usuario.nmUsuario}" filterBy="#{usuario.nmUsuario}" > 
 				<p:cellEditor>
 					<f:facet name="output">
 						<h:outputText value="#{usuario.nmUsuario}" />
@@ -62,7 +62,7 @@
 				</p:cellEditor>
 			</p:column>
 
-			<p:column headerText="CPF">
+			<p:column headerText="CPF" sortBy="#{usuario.cpf}" filterBy="#{usuario.cpf}" >
 				<p:cellEditor>
 					<f:facet name="output">
 						<h:outputText value="#{usuario.cpf}" />
@@ -74,7 +74,7 @@
 				</p:cellEditor>
 			</p:column>
 
-			<p:column headerText="Data Nascimento">
+			<p:column headerText="Data de Nascimento" sortBy="#{usuario.dtNascimento}" filterBy="#{usuario.dtNascimento}" >
 				<p:cellEditor>
 					<f:facet name="output">
 						<h:outputText value="#{usuario.dtNascimento}" />
@@ -82,6 +82,17 @@
 					<f:facet name="input">
 						<p:calendar id="german" value="#{usuario.dtNascimento}"
 							locale="pt_BR" navigator="true" pattern="dd/mm/yyyy" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+			
+			<p:column headerText="Data de Cadastro" sortBy="#{usuario.dtCadastro}">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{usuario.dtCadastro}" />
+					</f:facet>
+					<f:facet name="input">
+						<h:outputText value="#{usuario.dtCadastro}" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
