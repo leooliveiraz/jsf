@@ -41,19 +41,19 @@
 					navigator="true" pattern="dd/mm/yyyy" />
 
 				<p:outputLabel value="Usuario de Saida:" />
-				<p:password  value="#{atendimentoController.cdUsuarioSaida}" />
+				<p:inputText  value="#{atendimentoController.cdUsuarioSaida}" />
 				
 				<p:outputLabel value="Usuario de Entrada:" />
-				<p:password  value="#{atendimentoController.cdUsuarioEntrada}" />
+				<p:inputText  value="#{atendimentoController.cdUsuarioEntrada}" />
 				
 				<p:outputLabel value="Usuario:" />
-				<p:password id="senha" value="#{atendimentoController.usuarioCdUsuario}" />
+				<p:inputText id="senha" value="#{atendimentoController.usuarioCdUsuario}" />
 
 
 				<p:commandButton value="Cadastrar"
 					action="#{atendimentoController.cadastraAtendimento()}" />
 				<p:commandButton value="Limpar" 
-					action="cadastroatendimento.xhtml?faces-redirect=true" />
+					action="tabelaatendimento.xhtml?faces-redirect=true" />
 
 			</h:panelGrid>
 		</p:panel>
