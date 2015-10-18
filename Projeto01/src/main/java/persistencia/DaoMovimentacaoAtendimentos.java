@@ -2,11 +2,11 @@ package persistencia;
 
 import org.hibernate.Session;
 
-import entidades.MovimentacaoPaciente;
+import entidades.MovimentacaoAtendimentos;
 
-public class DaoMovimentacaoAtendimentos extends GenericDao<MovimentacaoPaciente> {
+public class DaoMovimentacaoAtendimentos extends GenericDao<MovimentacaoAtendimentos> {
 
-	public DaoMovimentacaoAtendimentos(Class<MovimentacaoPaciente> classe,
+	public DaoMovimentacaoAtendimentos(Class<MovimentacaoAtendimentos> classe,
 			Session session) {
 		super(classe, session);
 		// TODO Auto-generated constructor stub
