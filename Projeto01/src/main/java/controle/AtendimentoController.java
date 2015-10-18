@@ -1,8 +1,10 @@
 package controle;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -12,14 +14,28 @@ import org.hibernate.Session;
 import org.primefaces.event.RowEditEvent;
 
 import entidades.Atendimento;
+import entidades.Usuario;
 import persistencia.DaoAtendimento;
 import persistencia.GenericDao;
 import util.HibernateUtil;
 
 @ManagedBean(name="atendimentoController")
 @ViewScoped
-public class AtendimentoController {
-
+public class AtendimentoController implements Serializable {
+	private Atendimento atendimento;
+	private List<Atendimento> atendimentos;
+	
+	private static final long serialVersionUID = 1L;
+	
+	private int cdAtendimento;
+	private int cdAutorizacaoSaida;
+	private int cdPaciente;
+	private Date dtAtendimento;
+	private Date dtAutorizacaoSaida;
+	private String cdUsuarioSaida;
+	private String cdUsuarioEntrada;
+	private String usuarioCdUsuario;
+	
 	public int getCdAtendimento() {
 		return cdAtendimento;
 	}
@@ -88,17 +104,6 @@ public class AtendimentoController {
 		this.atendimentos = atendimentos;
 	}
 
-	private Atendimento atendimento;
-	private List<Atendimento> atendimentos;
-	
-	private int cdAtendimento;
-	private int cdAutorizacaoSaida;
-	private int cdPaciente;
-	private Date dtAtendimento;
-	private Date dtAutorizacaoSaida;
-	private String cdUsuarioSaida;
-	private String cdUsuarioEntrada;
-	private String usuarioCdUsuario;
 
 	public AtendimentoController(){
 
@@ -106,7 +111,14 @@ public class AtendimentoController {
 	
 	public String cadastraAtendimento(){
 		try {
-			Atendimento atendimento = new Atendimento(this.cdAtendimento,);
+			Atendimento atendimento = new Atendimento(this.cdAtendimento, 
+					  this.cdAutorizacaoSaida,
+					  this.cdPaciente,
+					  this.dtAtendimento,
+					  this.dtAutorizacaoSaida,
+					  this.cdUsuarioSaida,
+					  this.cdUsuarioEntrada,
+					  this.usuarioCdUsuario);
 	
 			Session session = HibernateUtil.getSession();
 			session.beginTransaction();
@@ -151,6 +163,28 @@ public class AtendimentoController {
 			
 		}
 
+	}
+	
+	@PostConstruct
+	public void consultaAtendimento(){
+		try{
+
+			Session session = HibernateUtil.getSession();
+			session.beginTransaction();
+
+			GenericDao<Atendimento> dao = new GenericDao<Atendimento>(Atendimento.class,session);
+
+			this.atendimentos = dao.buscaTodos();
+
+			session.getTransaction().commit();
+			session.close();
+			for (int i = 0;i<atendimentos.size();i++){
+				System.out.println(atendimentos.get(i).getCdAtendimento()+" "+atendimentos.get(i).getCdAutorizacaoSaida()+" "+atendimentos.get(i).getDtAutorizacaoSaida());
+			}
+		} 	catch(Exception e){
+			System.out.println(e.getMessage()+",\n"+e.getCause());
+			//e.printStackTrace();
+		}
 	}
 	
 	public List<Atendimento> getAtendimentos(){

@@ -1,16 +1,10 @@
 package entidades;
 
-// Generated 17/10/2015 19:11:37 by Hibernate Tools 3.4.0.CR1
+// Generated 01/09/2015 00:07:35 by Hibernate Tools 4.0.0
 
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -20,35 +14,33 @@ import javax.persistence.Table;
 @Table(name = "tags", catalog = "rfid_maternidade")
 public class Tags implements java.io.Serializable {
 
-	private Integer cdTag;
+	private int cdTag;
 	private String cdTagFornecedor;
 	private String snAtivo;
 	private String snUso;
-	private Set tagsAtendimentos = new HashSet(0);
 
 	public Tags() {
 	}
 
-	public Tags(String cdTagFornecedor) {
+	public Tags(int cdTag, String cdTagFornecedor) {
+		this.cdTag = cdTag;
 		this.cdTagFornecedor = cdTagFornecedor;
 	}
 
-	public Tags(String cdTagFornecedor, String snAtivo, String snUso,
-			Set tagsAtendimentos) {
+	public Tags(int cdTag, String cdTagFornecedor, String snAtivo, String snUso) {
+		this.cdTag = cdTag;
 		this.cdTagFornecedor = cdTagFornecedor;
 		this.snAtivo = snAtivo;
 		this.snUso = snUso;
-		this.tagsAtendimentos = tagsAtendimentos;
 	}
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "cd_tag", unique = true, nullable = false)
-	public Integer getCdTag() {
+	public int getCdTag() {
 		return this.cdTag;
 	}
 
-	public void setCdTag(Integer cdTag) {
+	public void setCdTag(int cdTag) {
 		this.cdTag = cdTag;
 	}
 
@@ -77,15 +69,6 @@ public class Tags implements java.io.Serializable {
 
 	public void setSnUso(String snUso) {
 		this.snUso = snUso;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tags")
-	public Set getTagsAtendimentos() {
-		return this.tagsAtendimentos;
-	}
-
-	public void setTagsAtendimentos(Set tagsAtendimentos) {
-		this.tagsAtendimentos = tagsAtendimentos;
 	}
 
 }

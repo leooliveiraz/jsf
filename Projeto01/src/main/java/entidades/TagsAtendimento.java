@@ -1,6 +1,6 @@
 package entidades;
 
-// Generated 17/10/2015 19:11:37 by Hibernate Tools 3.4.0.CR1
+// Generated 01/09/2015 00:07:35 by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import javax.persistence.AttributeOverride;
@@ -8,9 +8,6 @@ import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,8 +20,6 @@ import javax.persistence.TemporalType;
 public class TagsAtendimento implements java.io.Serializable {
 
 	private TagsAtendimentoId id;
-	private Atendimento atendimento;
-	private Tags tags;
 	private String cdUsuario;
 	private String snAtivo;
 	private Date dtInativacao;
@@ -32,19 +27,14 @@ public class TagsAtendimento implements java.io.Serializable {
 	public TagsAtendimento() {
 	}
 
-	public TagsAtendimento(TagsAtendimentoId id, Atendimento atendimento,
-			Tags tags, String snAtivo) {
+	public TagsAtendimento(TagsAtendimentoId id, String snAtivo) {
 		this.id = id;
-		this.atendimento = atendimento;
-		this.tags = tags;
 		this.snAtivo = snAtivo;
 	}
 
-	public TagsAtendimento(TagsAtendimentoId id, Atendimento atendimento,
-			Tags tags, String cdUsuario, String snAtivo, Date dtInativacao) {
+	public TagsAtendimento(TagsAtendimentoId id, String cdUsuario,
+			String snAtivo, Date dtInativacao) {
 		this.id = id;
-		this.atendimento = atendimento;
-		this.tags = tags;
 		this.cdUsuario = cdUsuario;
 		this.snAtivo = snAtivo;
 		this.dtInativacao = dtInativacao;
@@ -61,26 +51,6 @@ public class TagsAtendimento implements java.io.Serializable {
 
 	public void setId(TagsAtendimentoId id) {
 		this.id = id;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "atendimento_cd_atendimento", nullable = false, insertable = false, updatable = false)
-	public Atendimento getAtendimento() {
-		return this.atendimento;
-	}
-
-	public void setAtendimento(Atendimento atendimento) {
-		this.atendimento = atendimento;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "tags_cd_tag", nullable = false, insertable = false, updatable = false)
-	public Tags getTags() {
-		return this.tags;
-	}
-
-	public void setTags(Tags tags) {
-		this.tags = tags;
 	}
 
 	@Column(name = "cd_usuario", length = 20)

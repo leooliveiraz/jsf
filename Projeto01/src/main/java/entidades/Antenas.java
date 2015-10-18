@@ -1,15 +1,10 @@
 package entidades;
 
-// Generated 17/10/2015 19:11:37 by Hibernate Tools 3.4.0.CR1
+// Generated 01/09/2015 00:07:35 by Hibernate Tools 4.0.0
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -19,48 +14,60 @@ import javax.persistence.Table;
 @Table(name = "antenas", catalog = "rfid_maternidade")
 public class Antenas implements java.io.Serializable {
 
-	private AntenasId id;
-	private Setor setor;
+	private int cdAntena;
 	private String dsAntena;
+	private String cdIp;
+	private int setorCdSetor;
 
 	public Antenas() {
 	}
 
-	public Antenas(AntenasId id, Setor setor, String dsAntena) {
-		this.id = id;
-		this.setor = setor;
+	public Antenas(int cdAntena, int setorCdSetor) {
+		this.cdAntena = cdAntena;
+		this.setorCdSetor = setorCdSetor;
+	}
+
+	public Antenas(int cdAntena, String dsAntena, int setorCdSetor) {
+		this.cdAntena = cdAntena;
 		this.dsAntena = dsAntena;
+		this.setorCdSetor = setorCdSetor;
 	}
 
-	@EmbeddedId
-	@AttributeOverrides({
-			@AttributeOverride(name = "cdAntena", column = @Column(name = "cd_antena", nullable = false)),
-			@AttributeOverride(name = "cdIp", column = @Column(name = "cd_ip", nullable = false, length = 18)) })
-	public AntenasId getId() {
-		return this.id;
+	@Id
+	@Column(name = "cd_antena", unique = true, nullable = false)
+	public int getCdAntena() {
+		return this.cdAntena;
 	}
 
-	public void setId(AntenasId id) {
-		this.id = id;
+	public void setCdAntena(int cdAntena) {
+		this.cdAntena = cdAntena;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "setor_cd_setor", nullable = false)
-	public Setor getSetor() {
-		return this.setor;
-	}
-
-	public void setSetor(Setor setor) {
-		this.setor = setor;
-	}
-
-	@Column(name = "ds_antena", nullable = false, length = 50)
+	@Column(name = "ds_antena", length = 50)
 	public String getDsAntena() {
 		return this.dsAntena;
 	}
 
 	public void setDsAntena(String dsAntena) {
 		this.dsAntena = dsAntena;
+	}
+
+	@Column(name = "setor_cd_setor", nullable = false)
+	public int getSetorCdSetor() {
+		return this.setorCdSetor;
+	}
+
+	public void setSetorCdSetor(int setorCdSetor) {
+		this.setorCdSetor = setorCdSetor;
+	}
+
+	@Column(name = "cd_ip", length = 50)
+	public String getCdIp() {
+		return cdIp;
+	}
+
+	public void setCdIp(String cdIp) {
+		this.cdIp = cdIp;
 	}
 
 }

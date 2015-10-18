@@ -1,15 +1,10 @@
 package entidades;
 
-// Generated 17/10/2015 19:11:37 by Hibernate Tools 3.4.0.CR1
-
-import java.util.HashSet;
-import java.util.Set;
+// Generated 01/09/2015 00:07:35 by Hibernate Tools 4.0.0
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -22,26 +17,18 @@ public class Setor implements java.io.Serializable {
 	private int cdSetor;
 	private String nmSetor;
 	private String snAtivo;
-	private Set setorHasAtendimentos = new HashSet(0);
-	private Set antenases = new HashSet(0);
 
-	public Setor(int cdSetor, String nmSetor, String snAtivo) {
-		this.cdSetor = cdSetor;
-		this.nmSetor = nmSetor;
-		this.snAtivo = snAtivo;
+	public Setor() {
 	}
 
 	public Setor(int cdSetor) {
 		this.cdSetor = cdSetor;
 	}
 
-	public Setor(int cdSetor, String nmSetor, String snAtivo,
-			Set setorHasAtendimentos, Set antenases) {
+	public Setor(int cdSetor, String nmSetor, String snAtivo) {
 		this.cdSetor = cdSetor;
 		this.nmSetor = nmSetor;
 		this.snAtivo = snAtivo;
-		this.setorHasAtendimentos = setorHasAtendimentos;
-		this.antenases = antenases;
 	}
 
 	@Id
@@ -70,24 +57,6 @@ public class Setor implements java.io.Serializable {
 
 	public void setSnAtivo(String snAtivo) {
 		this.snAtivo = snAtivo;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "setor")
-	public Set getSetorHasAtendimentos() {
-		return this.setorHasAtendimentos;
-	}
-
-	public void setSetorHasAtendimentos(Set setorHasAtendimentos) {
-		this.setorHasAtendimentos = setorHasAtendimentos;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "setor")
-	public Set getAntenases() {
-		return this.antenases;
-	}
-
-	public void setAntenases(Set antenases) {
-		this.antenases = antenases;
 	}
 
 }

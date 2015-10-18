@@ -18,7 +18,7 @@ public class DaoUsuarioTest {
 		try{
 			Session session = HibernateUtil.getSession();
 			session.beginTransaction();
-			Usuario dto = new Usuario("LPROCHA","LEONARDO ROCHA ","40570094852",new Date(),new Date(),Utilitarios.sha256("teste"));
+			Usuario dto = new Usuario("LPEREIRA","LEONARDO ROCHA ","40570094852",new Date(),new Date(),Utilitarios.sha256("teste"));
 			GenericDao<Usuario> dao = new GenericDao<Usuario>(Usuario.class,session);		
 			dao.salvar(dto);
 			System.out.println("Salvo" + dto);

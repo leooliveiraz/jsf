@@ -1,14 +1,10 @@
 package entidades;
 
-// Generated 17/10/2015 19:11:37 by Hibernate Tools 3.4.0.CR1
+// Generated 01/09/2015 00:07:35 by Hibernate Tools 4.0.0
 
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -20,7 +16,6 @@ public class TipoAlerta implements java.io.Serializable {
 
 	private int cdTipoAlerta;
 	private String dsTipoAlerta;
-	private Set alertases = new HashSet(0);
 
 	public TipoAlerta() {
 	}
@@ -28,12 +23,6 @@ public class TipoAlerta implements java.io.Serializable {
 	public TipoAlerta(int cdTipoAlerta, String dsTipoAlerta) {
 		this.cdTipoAlerta = cdTipoAlerta;
 		this.dsTipoAlerta = dsTipoAlerta;
-	}
-
-	public TipoAlerta(int cdTipoAlerta, String dsTipoAlerta, Set alertases) {
-		this.cdTipoAlerta = cdTipoAlerta;
-		this.dsTipoAlerta = dsTipoAlerta;
-		this.alertases = alertases;
 	}
 
 	@Id
@@ -53,15 +42,6 @@ public class TipoAlerta implements java.io.Serializable {
 
 	public void setDsTipoAlerta(String dsTipoAlerta) {
 		this.dsTipoAlerta = dsTipoAlerta;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipoAlerta")
-	public Set getAlertases() {
-		return this.alertases;
-	}
-
-	public void setAlertases(Set alertases) {
-		this.alertases = alertases;
 	}
 
 }

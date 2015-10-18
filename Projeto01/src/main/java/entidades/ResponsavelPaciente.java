@@ -1,15 +1,12 @@
 package entidades;
 
-// Generated 17/10/2015 19:11:37 by Hibernate Tools 3.4.0.CR1
+// Generated 01/09/2015 00:07:35 by Hibernate Tools 4.0.0
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -20,17 +17,12 @@ import javax.persistence.Table;
 public class ResponsavelPaciente implements java.io.Serializable {
 
 	private ResponsavelPacienteId id;
-	private Paciente paciente;
-	private Responsavel responsavel;
 
 	public ResponsavelPaciente() {
 	}
 
-	public ResponsavelPaciente(ResponsavelPacienteId id, Paciente paciente,
-			Responsavel responsavel) {
+	public ResponsavelPaciente(ResponsavelPacienteId id) {
 		this.id = id;
-		this.paciente = paciente;
-		this.responsavel = responsavel;
 	}
 
 	@EmbeddedId
@@ -43,26 +35,6 @@ public class ResponsavelPaciente implements java.io.Serializable {
 
 	public void setId(ResponsavelPacienteId id) {
 		this.id = id;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "paciente_cd_paciente", nullable = false, insertable = false, updatable = false)
-	public Paciente getPaciente() {
-		return this.paciente;
-	}
-
-	public void setPaciente(Paciente paciente) {
-		this.paciente = paciente;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "responsavel_cd_responsavel", nullable = false, insertable = false, updatable = false)
-	public Responsavel getResponsavel() {
-		return this.responsavel;
-	}
-
-	public void setResponsavel(Responsavel responsavel) {
-		this.responsavel = responsavel;
 	}
 
 }

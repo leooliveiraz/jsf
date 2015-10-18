@@ -1,17 +1,11 @@
 package entidades;
 
-// Generated 17/10/2015 19:11:37 by Hibernate Tools 3.4.0.CR1
+// Generated 01/09/2015 00:07:35 by Hibernate Tools 4.0.0
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,40 +18,37 @@ import javax.persistence.TemporalType;
 public class Atendimento implements java.io.Serializable {
 
 	private int cdAtendimento;
-	private Paciente paciente;
-	private Usuario usuario;
+	private Integer cdAutorizacaoSaida;
+	private int cdPaciente;
 	private Date dtAtendimento;
+	private Date dtAutorizacaoSaida;
 	private String cdUsuarioSaida;
-	private Date dtSaida;
-	private Set observacoeses = new HashSet(0);
-	private Set tagsAtendimentos = new HashSet(0);
-	private Set autorizacaoSaidas = new HashSet(0);
-	private Set setorHasAtendimentos = new HashSet(0);
+	private String cdUsuarioEntrada;
+	private String usuarioCdUsuario;
 
 	public Atendimento() {
 	}
 
-	public Atendimento(int cdAtendimento, Paciente paciente,
-			String cdUsuarioSaida) {
+	public Atendimento(int cdAtendimento, int cdPaciente,
+			String cdUsuarioSaida, String usuarioCdUsuario) {
 		this.cdAtendimento = cdAtendimento;
-		this.paciente = paciente;
+		this.cdPaciente = cdPaciente;
 		this.cdUsuarioSaida = cdUsuarioSaida;
+		this.usuarioCdUsuario = usuarioCdUsuario;
 	}
 
-	public Atendimento(int cdAtendimento, Paciente paciente, Usuario usuario,
-			Date dtAtendimento, String cdUsuarioSaida, Date dtSaida,
-			Set observacoeses, Set tagsAtendimentos, Set autorizacaoSaidas,
-			Set setorHasAtendimentos) {
+	public Atendimento(int cdAtendimento, Integer cdAutorizacaoSaida,
+			int cdPaciente, Date dtAtendimento, Date dtAutorizacaoSaida,
+			String cdUsuarioSaida, String cdUsuarioEntrada,
+			String usuarioCdUsuario) {
 		this.cdAtendimento = cdAtendimento;
-		this.paciente = paciente;
-		this.usuario = usuario;
+		this.cdAutorizacaoSaida = cdAutorizacaoSaida;
+		this.cdPaciente = cdPaciente;
 		this.dtAtendimento = dtAtendimento;
+		this.dtAutorizacaoSaida = dtAutorizacaoSaida;
 		this.cdUsuarioSaida = cdUsuarioSaida;
-		this.dtSaida = dtSaida;
-		this.observacoeses = observacoeses;
-		this.tagsAtendimentos = tagsAtendimentos;
-		this.autorizacaoSaidas = autorizacaoSaidas;
-		this.setorHasAtendimentos = setorHasAtendimentos;
+		this.cdUsuarioEntrada = cdUsuarioEntrada;
+		this.usuarioCdUsuario = usuarioCdUsuario;
 	}
 
 	@Id
@@ -70,24 +61,22 @@ public class Atendimento implements java.io.Serializable {
 		this.cdAtendimento = cdAtendimento;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cd_paciente", nullable = false)
-	public Paciente getPaciente() {
-		return this.paciente;
+	@Column(name = "cd_autorizacao_saida")
+	public Integer getCdAutorizacaoSaida() {
+		return this.cdAutorizacaoSaida;
 	}
 
-	public void setPaciente(Paciente paciente) {
-		this.paciente = paciente;
+	public void setCdAutorizacaoSaida(Integer cdAutorizacaoSaida) {
+		this.cdAutorizacaoSaida = cdAutorizacaoSaida;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cd_usuario_entrada")
-	public Usuario getUsuario() {
-		return this.usuario;
+	@Column(name = "cd_paciente", nullable = false)
+	public int getCdPaciente() {
+		return this.cdPaciente;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setCdPaciente(int cdPaciente) {
+		this.cdPaciente = cdPaciente;
 	}
 
 	@Temporal(TemporalType.DATE)
@@ -100,6 +89,16 @@ public class Atendimento implements java.io.Serializable {
 		this.dtAtendimento = dtAtendimento;
 	}
 
+	@Temporal(TemporalType.DATE)
+	@Column(name = "dt_autorizacao_saida", length = 10)
+	public Date getDtAutorizacaoSaida() {
+		return this.dtAutorizacaoSaida;
+	}
+
+	public void setDtAutorizacaoSaida(Date dtAutorizacaoSaida) {
+		this.dtAutorizacaoSaida = dtAutorizacaoSaida;
+	}
+
 	@Column(name = "cd_usuario_saida", nullable = false, length = 20)
 	public String getCdUsuarioSaida() {
 		return this.cdUsuarioSaida;
@@ -109,50 +108,22 @@ public class Atendimento implements java.io.Serializable {
 		this.cdUsuarioSaida = cdUsuarioSaida;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "dt_saida", length = 19)
-	public Date getDtSaida() {
-		return this.dtSaida;
+	@Column(name = "cd_usuario_entrada", length = 20)
+	public String getCdUsuarioEntrada() {
+		return this.cdUsuarioEntrada;
 	}
 
-	public void setDtSaida(Date dtSaida) {
-		this.dtSaida = dtSaida;
+	public void setCdUsuarioEntrada(String cdUsuarioEntrada) {
+		this.cdUsuarioEntrada = cdUsuarioEntrada;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "atendimento")
-	public Set getObservacoeses() {
-		return this.observacoeses;
+	@Column(name = "usuario_cd_usuario", nullable = false, length = 20)
+	public String getUsuarioCdUsuario() {
+		return this.usuarioCdUsuario;
 	}
 
-	public void setObservacoeses(Set observacoeses) {
-		this.observacoeses = observacoeses;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "atendimento")
-	public Set getTagsAtendimentos() {
-		return this.tagsAtendimentos;
-	}
-
-	public void setTagsAtendimentos(Set tagsAtendimentos) {
-		this.tagsAtendimentos = tagsAtendimentos;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "atendimento")
-	public Set getAutorizacaoSaidas() {
-		return this.autorizacaoSaidas;
-	}
-
-	public void setAutorizacaoSaidas(Set autorizacaoSaidas) {
-		this.autorizacaoSaidas = autorizacaoSaidas;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "atendimento")
-	public Set getSetorHasAtendimentos() {
-		return this.setorHasAtendimentos;
-	}
-
-	public void setSetorHasAtendimentos(Set setorHasAtendimentos) {
-		this.setorHasAtendimentos = setorHasAtendimentos;
+	public void setUsuarioCdUsuario(String usuarioCdUsuario) {
+		this.usuarioCdUsuario = usuarioCdUsuario;
 	}
 
 }

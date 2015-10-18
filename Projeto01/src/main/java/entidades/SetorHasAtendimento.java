@@ -1,15 +1,12 @@
 package entidades;
 
-// Generated 17/10/2015 19:11:37 by Hibernate Tools 3.4.0.CR1
+// Generated 01/09/2015 00:07:35 by Hibernate Tools 4.0.0
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -20,17 +17,12 @@ import javax.persistence.Table;
 public class SetorHasAtendimento implements java.io.Serializable {
 
 	private SetorHasAtendimentoId id;
-	private Setor setor;
-	private Atendimento atendimento;
 
 	public SetorHasAtendimento() {
 	}
 
-	public SetorHasAtendimento(SetorHasAtendimentoId id, Setor setor,
-			Atendimento atendimento) {
+	public SetorHasAtendimento(SetorHasAtendimentoId id) {
 		this.id = id;
-		this.setor = setor;
-		this.atendimento = atendimento;
 	}
 
 	@EmbeddedId
@@ -43,26 +35,6 @@ public class SetorHasAtendimento implements java.io.Serializable {
 
 	public void setId(SetorHasAtendimentoId id) {
 		this.id = id;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "setor_cd_setor", nullable = false, insertable = false, updatable = false)
-	public Setor getSetor() {
-		return this.setor;
-	}
-
-	public void setSetor(Setor setor) {
-		this.setor = setor;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "atendimento_cd_atendimento", nullable = false, insertable = false, updatable = false)
-	public Atendimento getAtendimento() {
-		return this.atendimento;
-	}
-
-	public void setAtendimento(Atendimento atendimento) {
-		this.atendimento = atendimento;
 	}
 
 }
