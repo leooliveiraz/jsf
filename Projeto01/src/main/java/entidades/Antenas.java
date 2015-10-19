@@ -27,9 +27,10 @@ public class Antenas implements java.io.Serializable {
 		this.setorCdSetor = setorCdSetor;
 	}
 
-	public Antenas(int cdAntena, String dsAntena, int setorCdSetor) {
+	public Antenas(int cdAntena, String dsAntena, String cdIp ,int setorCdSetor) {
 		this.cdAntena = cdAntena;
 		this.dsAntena = dsAntena;
+		this.cdIp = cdIp;
 		this.setorCdSetor = setorCdSetor;
 	}
 
@@ -61,7 +62,7 @@ public class Antenas implements java.io.Serializable {
 		this.setorCdSetor = setorCdSetor;
 	}
 
-	@Column(name = "cd_ip", length = 50)
+	@Column(name = "cd_ip", length = 50,  nullable = false)
 	public String getCdIp() {
 		return cdIp;
 	}

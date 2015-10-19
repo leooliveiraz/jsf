@@ -15,7 +15,6 @@ import org.primefaces.event.RowEditEvent;
 import persistencia.DaoSetor;
 import util.HibernateUtil;
 import entidades.Setor;
-import entidades.Usuario;
 
 @ManagedBean
 @ViewScoped

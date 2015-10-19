@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Tabela de Antenas no Sistema</title>
+</h:head>
+
+
+
+<h:body>
+
+	<ui:include src="/cabecalho.xhtml" />
+
+	<h:form id="form">
+		<p:growl id="msgs" showDetail="true" />
+
+		<p:commandButton value="Cadastrar"
+			action="cadastroantena.xhtml?faces-redirect=true" />
+
+		<p:dataTable id="antenas" var="antena"
+			value="#{antenaController.lista}" editable="true"
+			style="margin-bottom:20px" rows="10" paginator="true"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="10,25,50">
+			<f:facet name="header">
+           	Lista de Antenas
+       		</f:facet>
+
+			<p:ajax event="rowEdit" listener="#{antenaController.onRowEdit}"
+				update=":form:msgs" />
+			<p:ajax event="rowEditCancel"
+				listener="#{antenaController.onRowCancel}" update=":form:msgs" />
+
+			<p:column headerText="Código" sortBy="#{antena.cdAntena}"
+				filterBy="#{antena.cdAntena}">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{antena.cdAntena}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText id="modelInput" value="#{antena.cdAntena}"
+							style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Descrição" sortBy="#{antena.dsAntena}"
+				filterBy="#{antena.dsAntena}">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{antena.dsAntena}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{antena.dsAntena}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Setor" sortBy="#{antena.setorCdSetor}"
+				filterBy="#{antena.setorCdSetor}">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{antena.setorCdSetor}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:selectOneMenu id="Setor" value="#{antena.setorCdSetor}"
+							style="width:300px">
+							<f:selectItems value="#{antenaController.listaSetor}" var="setor"
+								itemValue="#{setor.cdSetor}" itemDescription="#{setor.nmSetor}"
+								itemLabel="#{setor.nmSetor}" />
+						</p:selectOneMenu>
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+
+			<p:column style="width:32px">
+				<p:rowEditor />
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+
+
+</html>
