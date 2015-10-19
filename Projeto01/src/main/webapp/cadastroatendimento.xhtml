@@ -23,31 +23,10 @@
 
 
 			<h:panelGrid columns="2">
-				<p:outputLabel value="Atendimento:" />
-				<p:inputText value="#{atendimentoController.cdAtendimento}" />
 
-				<p:outputLabel value="Autorizacao de Saida:" />
-				<p:inputText value="#{atendimentoController.cdAutorizacaoSaida}" />
-
-				<p:outputLabel value="Paciente:" />
-				<p:inputText value="#{atendimentoController.cdPaciente}" />
-
-				<p:outputLabel for="german" value="Data do Atendimento" />
-				<p:calendar id="german" value="#{atendimentoController.dtAtendimento}"
-					locale="pt_BR" navigator="true" pattern="dd/mm/yyyy" />
-
-				<p:outputLabel for="german" value="Data Autorizacao de Saida" />
-				<p:calendar value="#{atendimentoController.dtAutorizacaoSaida}" locale="pt_BR"
-					navigator="true" pattern="dd/mm/yyyy" />
-
-				<p:outputLabel value="Usuario de Saida:" />
-				<p:inputText  value="#{atendimentoController.cdUsuarioSaida}" />
-				
-				<p:outputLabel value="Usuario de Entrada:" />
-				<p:inputText  value="#{atendimentoController.cdUsuarioEntrada}" />
-				
-				<p:outputLabel value="Usuario:" />
-				<p:inputText id="senha" value="#{atendimentoController.usuarioCdUsuario}" />
+				<p:commandButton value="Escolher Paciente"
+					action="" />
+					<p:outputLabel value="#{atendimentoController.cdPaciente}" />
 
 
 				<p:commandButton value="Cadastrar"

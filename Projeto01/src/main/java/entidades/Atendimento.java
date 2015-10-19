@@ -18,13 +18,11 @@ import javax.persistence.TemporalType;
 public class Atendimento implements java.io.Serializable {
 
 	private int cdAtendimento;
-	private Integer cdAutorizacaoSaida;
 	private int cdPaciente;
 	private Date dtAtendimento;
-	private Date dtAutorizacaoSaida;
+	private Date dtAlta;
 	private String cdUsuarioSaida;
 	private String cdUsuarioEntrada;
-	private String usuarioCdUsuario;
 
 	public Atendimento() {
 	}
@@ -34,22 +32,17 @@ public class Atendimento implements java.io.Serializable {
 		this.cdAtendimento = cdAtendimento;
 		this.cdPaciente = cdPaciente;
 		this.cdUsuarioSaida = cdUsuarioSaida;
-		this.usuarioCdUsuario = usuarioCdUsuario;
 	}
-
-	public Atendimento(int cdAtendimento, Integer cdAutorizacaoSaida,
-			int cdPaciente, Date dtAtendimento, Date dtAutorizacaoSaida,
-			String cdUsuarioSaida, String cdUsuarioEntrada,
-			String usuarioCdUsuario) {
-		this.cdAtendimento = cdAtendimento;
-		this.cdAutorizacaoSaida = cdAutorizacaoSaida;
+	
+	public Atendimento( int cdPaciente,
+			Date dtAtendimento,
+			String cdUsuarioEntrada) {
 		this.cdPaciente = cdPaciente;
 		this.dtAtendimento = dtAtendimento;
-		this.dtAutorizacaoSaida = dtAutorizacaoSaida;
-		this.cdUsuarioSaida = cdUsuarioSaida;
 		this.cdUsuarioEntrada = cdUsuarioEntrada;
-		this.usuarioCdUsuario = usuarioCdUsuario;
 	}
+
+	
 
 	@Id
 	@Column(name = "cd_atendimento", unique = true, nullable = false)
@@ -59,15 +52,6 @@ public class Atendimento implements java.io.Serializable {
 
 	public void setCdAtendimento(int cdAtendimento) {
 		this.cdAtendimento = cdAtendimento;
-	}
-
-	@Column(name = "cd_autorizacao_saida")
-	public Integer getCdAutorizacaoSaida() {
-		return this.cdAutorizacaoSaida;
-	}
-
-	public void setCdAutorizacaoSaida(Integer cdAutorizacaoSaida) {
-		this.cdAutorizacaoSaida = cdAutorizacaoSaida;
 	}
 
 	@Column(name = "cd_paciente", nullable = false)
@@ -92,11 +76,11 @@ public class Atendimento implements java.io.Serializable {
 	@Temporal(TemporalType.DATE)
 	@Column(name = "dt_autorizacao_saida", length = 10)
 	public Date getDtAutorizacaoSaida() {
-		return this.dtAutorizacaoSaida;
+		return this.dtAlta;
 	}
 
 	public void setDtAutorizacaoSaida(Date dtAutorizacaoSaida) {
-		this.dtAutorizacaoSaida = dtAutorizacaoSaida;
+		this.dtAlta = dtAutorizacaoSaida;
 	}
 
 	@Column(name = "cd_usuario_saida", nullable = false, length = 20)
@@ -117,13 +101,6 @@ public class Atendimento implements java.io.Serializable {
 		this.cdUsuarioEntrada = cdUsuarioEntrada;
 	}
 
-	@Column(name = "usuario_cd_usuario", nullable = false, length = 20)
-	public String getUsuarioCdUsuario() {
-		return this.usuarioCdUsuario;
-	}
-
-	public void setUsuarioCdUsuario(String usuarioCdUsuario) {
-		this.usuarioCdUsuario = usuarioCdUsuario;
-	}
+	
 
 }

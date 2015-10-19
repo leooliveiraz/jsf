@@ -8,7 +8,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>Tabela de Antenas no Sistema</title>
+	<title>Tabela de Tags no Sistema</title>
 </h:head>
 
 
@@ -21,71 +21,75 @@
 		<p:growl id="msgs" showDetail="true" />
 
 		<p:commandButton value="Cadastrar"
-			action="cadastroantena.xhtml?faces-redirect=true" />
+			action="cadastrotags.xhtml?faces-redirect=true" />
 
-		<p:dataTable id="antenas" var="antena"
-			value="#{antenaController.lista}" editable="true"
+		<p:dataTable  var="tag"
+			value="#{tagsController.lista}" editable="true"
 			style="margin-bottom:20px" rows="10" paginator="true"
 			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 			rowsPerPageTemplate="10,25,50">
 			<f:facet name="header">
-           	Lista de Antenas
+           	Lista de Tags
        		</f:facet>
 
-			<p:ajax event="rowEdit" listener="#{antenaController.onRowEdit}"
+			<p:ajax event="rowEdit" listener="#{tagsController.onRowEdit}"
 				update=":form:msgs" />
 			<p:ajax event="rowEditCancel"
-				listener="#{antenaController.onRowCancel}" update=":form:msgs" />
+				listener="#{tagsController.onRowCancel}" update=":form:msgs" />
 
-			<p:column headerText="Código" sortBy="#{antena.cdAntena}"
-				filterBy="#{antena.cdAntena}">
+			<p:column headerText="Código" sortBy="#{tag.cdTag}"
+				filterBy="#{tag.cdTag}">
 				<p:cellEditor>
 					<f:facet name="output">
-						<h:outputText value="#{antena.cdAntena}" />
+						<h:outputText value="#{tag.cdTag}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText id="modelInput" value="#{antena.cdAntena}"
+						<p:inputText  value="#{tag.cdTag}"
 							style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
 
-			<p:column headerText="Descrição" sortBy="#{antena.dsAntena}"
-				filterBy="#{antena.dsAntena}">
+			<p:column headerText="Código Fornecedor" sortBy="#{tag.cdTagFornecedor}"
+				filterBy="#{tag.cdTagFornecedor}">
 				<p:cellEditor>
 					<f:facet name="output">
-						<h:outputText value="#{antena.dsAntena}" />
+						<h:outputText value="#{tag.cdTagFornecedor}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText value="#{antena.dsAntena}" style="width:100%" />
+						<p:inputText value="#{tag.cdTagFornecedor}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
 
-			<p:column headerText="IP" sortBy="#{antena.cdIp}"
-				filterBy="#{antena.cdIp}">
+			
+
+			<p:column headerText="Ativo" sortBy="#{tag.snAtivo}" filterBy="#{tag.snAtivo}">
 				<p:cellEditor>
 					<f:facet name="output">
-						<h:outputText value="#{antena.cdIp}" />
+						<h:outputText value="#{tag.snAtivo}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText value="#{antena.cdIp}" style="width:100%" />
+						<p:selectOneMenu id="Ativo" value="#{tag.snAtivo}" 
+							style="width:125px">
+							<f:selectItem itemLabel="SIM" itemValue="S" />
+							<f:selectItem itemLabel="NÃO" itemValue="N" />
+						</p:selectOneMenu>
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
-
-			<p:column headerText="Setor" sortBy="#{antena.setorCdSetor}"
-				filterBy="#{antena.setorCdSetor}">
+			
+			<p:column headerText="Em Uso" sortBy="#{tag.snUso}"
+				filterBy="#{tag.snUso}">
 				<p:cellEditor>
 					<f:facet name="output">
-						<h:outputText value="#{antena.setorCdSetor}" />
+						<h:outputText value="#{tag.snUso}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:selectOneMenu id="Setor" value="#{antena.setorCdSetor}"
+						<p:selectOneMenu id="Uso" value="#{tag.snUso}" disabled="true"
 							style="width:300px">
-							<f:selectItems value="#{antenaController.listaSetor}" var="setor"
-								itemValue="#{setor.cdSetor}" itemDescription="#{setor.nmSetor}"
-								itemLabel="#{setor.nmSetor}" />
+							<f:selectItem itemValue="S" itemLabel="SIM" />
+							<f:selectItem itemValue="N" itemLabel="NÃO" />
 						</p:selectOneMenu>
 					</f:facet>
 				</p:cellEditor>
@@ -96,6 +100,8 @@
 				<p:rowEditor />
 			</p:column>
 		</p:dataTable>
+
+
 	</h:form>
 </h:body>
 

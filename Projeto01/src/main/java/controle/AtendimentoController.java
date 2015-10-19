@@ -11,11 +11,14 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.hibernate.Session;
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.RowEditEvent;
 
 import entidades.Atendimento;
+import entidades.Paciente;
 import entidades.Usuario;
 import persistencia.DaoAtendimento;
+import persistencia.DaoPaciente;
 import persistencia.GenericDao;
 import util.HibernateUtil;
 
@@ -23,198 +26,105 @@ import util.HibernateUtil;
 @ViewScoped
 public class AtendimentoController implements Serializable {
 	private Atendimento atendimento;
-	private List<Atendimento> atendimentos;
+	private List<Atendimento> lista;
+	private List<Paciente> listaPaciente;
 	
 	private static final long serialVersionUID = 1L;
 	
 	private int cdAtendimento;
-	private int cdAutorizacaoSaida;
 	private int cdPaciente;
 	private Date dtAtendimento;
-	private Date dtAutorizacaoSaida;
+	private Date dtAlta;
 	private String cdUsuarioSaida;
 	private String cdUsuarioEntrada;
-	private String usuarioCdUsuario;
-	
+	public Atendimento getAtendimento() {
+		return atendimento;
+	}
+	public void setAtendimento(Atendimento atendimento) {
+		this.atendimento = atendimento;
+	}
+	public List<Atendimento> getLista() {
+		return lista;
+	}
+	public void setLista(List<Atendimento> lista) {
+		lista = lista;
+	}
 	public int getCdAtendimento() {
 		return cdAtendimento;
 	}
-
 	public void setCdAtendimento(int cdAtendimento) {
 		this.cdAtendimento = cdAtendimento;
 	}
-
-	public int getCdAutorizacaoSaida() {
-		return cdAutorizacaoSaida;
-	}
-
-	public void setCdAutorizacaoSaida(int cdAutorizacaoSaida) {
-		this.cdAutorizacaoSaida = cdAutorizacaoSaida;
-	}
-
 	public int getCdPaciente() {
 		return cdPaciente;
 	}
-
 	public void setCdPaciente(int cdPaciente) {
 		this.cdPaciente = cdPaciente;
 	}
-
 	public Date getDtAtendimento() {
 		return dtAtendimento;
 	}
-
 	public void setDtAtendimento(Date dtAtendimento) {
 		this.dtAtendimento = dtAtendimento;
 	}
-
-	public Date getDtAutorizacaoSaida() {
-		return dtAutorizacaoSaida;
+	public Date getDtAlta() {
+		return dtAlta;
 	}
-
-	public void setDtAutorizacaoSaida(Date dtAutorizacaoSaida) {
-		this.dtAutorizacaoSaida = dtAutorizacaoSaida;
+	public void setDtAlta(Date dtAlta) {
+		this.dtAlta = dtAlta;
 	}
-
 	public String getCdUsuarioSaida() {
 		return cdUsuarioSaida;
 	}
-
 	public void setCdUsuarioSaida(String cdUsuarioSaida) {
 		this.cdUsuarioSaida = cdUsuarioSaida;
 	}
-
 	public String getCdUsuarioEntrada() {
 		return cdUsuarioEntrada;
 	}
-
 	public void setCdUsuarioEntrada(String cdUsuarioEntrada) {
 		this.cdUsuarioEntrada = cdUsuarioEntrada;
 	}
-
-	public String getUsuarioCdUsuario() {
-		return usuarioCdUsuario;
-	}
-
-	public void setUsuarioCdUsuario(String usuarioCdUsuario) {
-		this.usuarioCdUsuario = usuarioCdUsuario;
-	}
-
-	public void setAtendimentos(List<Atendimento> atendimentos) {
-		this.atendimentos = atendimentos;
-	}
-
-
-	public AtendimentoController(){
-
-	}
 	
-	public String cadastraAtendimento(){
-		try {
-			Atendimento atendimento = new Atendimento(this.cdAtendimento, 
-					  this.cdAutorizacaoSaida,
-					  this.cdPaciente,
-					  this.dtAtendimento,
-					  this.dtAutorizacaoSaida,
-					  this.cdUsuarioSaida,
-					  this.cdUsuarioEntrada,
-					  this.usuarioCdUsuario);
-	
-			Session session = HibernateUtil.getSession();
-			session.beginTransaction();
-			
-			GenericDao<Atendimento> dao = new GenericDao<Atendimento>(Atendimento.class,session);
-			dao.salvar(atendimento);
-			session.getTransaction().commit();
-			session.close();
-			
-			return "tabelaatendimento.xhtml";
-			
-		} catch (Exception e){
-			System.out.println(e.getMessage());
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Erro:"+e.getMessage()));
-			
-			return "tabelaatendimento.xhtml";
-		}
-
+	public List<Paciente> getListaPaciente() {
+		return listaPaciente;
 	}
-	
-	public void alteraAtendimento(Atendimento atendimento){
-		try{
-
-			Session session = HibernateUtil.getSession();
-			session.beginTransaction();
-
-			
-			atendimento.getDtAtendimento();
-			atendimento.getCdPaciente();
-			atendimento.getCdUsuarioEntrada().toUpperCase();
-			
-			DaoAtendimento dao = new DaoAtendimento(Atendimento.class,session);
-			dao.atualizar(atendimento);
-			session.getTransaction().commit();
-			session.close();
-
-			System.out.println("OK");
-
-
-		} 	catch(Exception e){
-			System.out.println(e.getMessage());
-			
-		}
-
+	public void setListaPaciente(List<Paciente> listaPaciente) {
+		this.listaPaciente = listaPaciente;
 	}
 	
 	@PostConstruct
-	public void consultaAtendimento(){
-		try{
-
-			Session session = HibernateUtil.getSession();
-			session.beginTransaction();
-
-			GenericDao<Atendimento> dao = new GenericDao<Atendimento>(Atendimento.class,session);
-
-			this.atendimentos = dao.buscaTodos();
-
-			session.getTransaction().commit();
-			session.close();
-			for (int i = 0;i<atendimentos.size();i++){
-				System.out.println(atendimentos.get(i).getCdAtendimento()+" "+atendimentos.get(i).getCdAutorizacaoSaida()+" "+atendimentos.get(i).getDtAutorizacaoSaida());
-			}
-		} 	catch(Exception e){
-			System.out.println(e.getMessage()+",\n"+e.getCause());
-			//e.printStackTrace();
-		}
+	public void iniciar(){
+		buscaPacientes();
 	}
-	
-	public List<Atendimento> getAtendimentos(){
-		return atendimentos;
-	}
-	
-	public Atendimento getAtendimento(){
-		return atendimento;
-	}
-	
-	public void setAtendimento(Atendimento atendimento){
-	      this.atendimento = atendimento;
-		  this.cdAtendimento = this.atendimento.getCdAtendimento();
-		  this.cdAutorizacaoSaida = this.atendimento.getCdAutorizacaoSaida();
-		  this.cdPaciente = this.atendimento.getCdPaciente();
-		  this.dtAtendimento = this.atendimento.getDtAtendimento();
-		  this.dtAutorizacaoSaida = this.atendimento.getDtAutorizacaoSaida();
-		  this.cdUsuarioSaida = this.atendimento.getCdUsuarioSaida();
-		  this.cdUsuarioEntrada = this.atendimento.getCdUsuarioEntrada();
-		  this.usuarioCdUsuario = this.atendimento.getUsuarioCdUsuario();
-	}
-	
-	public void onRowEdit(RowEditEvent event) {
-		alteraAtendimento(((Atendimento) event.getObject()));
-        FacesMessage msg = new FacesMessage("Registro editado", ((Atendimento) event.getObject()).getCdUsuarioSaida());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+	public void selectCarFromDialog(Paciente paciente) {
+        RequestContext.getCurrentInstance().closeDialog(paciente);
     }
 	
-    public void onRowCancel(RowEditEvent event) {
-        FacesMessage msg = new FacesMessage("Edição cancelada", ((Atendimento) event.getObject()).getCdUsuarioSaida());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-    }    
+	
+	
+	public String cadastraAtendimento(){
+		Atendimento atendimento = new Atendimento(this.cdPaciente, new Date(),this.cdUsuarioEntrada);
+		Session session = new HibernateUtil().getSession();
+		DaoAtendimento dao = new DaoAtendimento(Atendimento.class, session);
+		session.beginTransaction();
+		dao.salvar(atendimento);
+		session.getTransaction().commit();
+		session.close();
+		
+		return "home.xhtml";
+	}
+	
+	
+	
+	public void buscaPacientes(){
+		
+		Session session = new HibernateUtil().getSession();
+		DaoPaciente dao = new DaoPaciente(Paciente.class, session);
+	
+		listaPaciente = dao.buscaTodos();
+		session.close();
+		
+	}
+	
 }

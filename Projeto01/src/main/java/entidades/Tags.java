@@ -33,6 +33,13 @@ public class Tags implements java.io.Serializable {
 		this.snAtivo = snAtivo;
 		this.snUso = snUso;
 	}
+	
+	public Tags(String cdTagFornecedor, String snAtivo, String snUso) {
+		
+		this.cdTagFornecedor = cdTagFornecedor;
+		this.snAtivo = snAtivo;
+		this.snUso = snUso;
+	}
 
 	@Id
 	@Column(name = "cd_tag", unique = true, nullable = false)
