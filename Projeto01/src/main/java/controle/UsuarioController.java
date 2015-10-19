@@ -118,6 +118,7 @@ public class UsuarioController implements Serializable {
         
     }
 
+
 	@PostConstruct
 	public void consultaUsuario(){
 		try{

@@ -21,7 +21,7 @@
 		<p:commandButton value="Cadastrar"
 			action="cadastroatendimento.xhtml?faces-redirect=true" />
 		<p:dataTable id="atendimentos" var="atendimento"
-			value="#{atendimentoController.atendimentos}" editable="true"
+			value="#{atendimentoController.lista}" editable="true"
 			style="margin-bottom:20px"
 			rows = "10"
 			paginator="true"

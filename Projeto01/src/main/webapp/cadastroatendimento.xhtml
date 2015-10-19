@@ -24,6 +24,13 @@
 			<p:commandButton value="Usuários" onclick="PF('dlg').show();"
 				type="button" />
 
+			<p:outputLabel for="nmUsuario" value="Usuarios: " />
+		        <p:selectOneMenu id="nmUsuario" value="#{usuarioController.nmUsuario}">
+		            <f:selectItem itemLabel="Selecione.." itemValue="" />
+		            <f:selectItems value="#{usuarioController.usuarios}"/>
+		        </p:selectOneMenu>
+			
+			
 			<p:dialog header="Escolha um Paciente" widgetVar="dlg" dynamic="true" width="900px">
 				<p:dataTable var="usuario" value="#{usuarioController.usuarios}">
 					<p:column headerText="CD">
