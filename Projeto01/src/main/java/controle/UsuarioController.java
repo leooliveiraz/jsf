@@ -2,7 +2,9 @@ package controle;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -11,7 +13,10 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.hibernate.Session;
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.RowEditEvent;
+import org.primefaces.event.SelectEvent;
+
 import entidades.Usuario;
 import persistencia.DaoUsuario;
 import persistencia.GenericDao;
@@ -92,7 +97,25 @@ public class UsuarioController implements Serializable {
 		}
 
 	}
-
+	
+	public void chooseCar() {
+        Map<String,Object> options = new HashMap<String, Object>();
+        options.put("resizable", false);
+        options.put("draggable", false);
+        options.put("modal", true);
+        RequestContext.getCurrentInstance().openDialog("escolhapaciente", options, null);
+    }
+	
+	public void onCarChosen(SelectEvent event) {
+        Usuario car = (Usuario) event.getObject();
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Car Selected", "Id:" + car.getCdUsuario());
+         
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+	
+	public void selectUserFromDialog(Usuario car) {
+        RequestContext.getCurrentInstance().closeDialog(car);
+    }
 
 	@PostConstruct
 	public void consultaUsuario(){

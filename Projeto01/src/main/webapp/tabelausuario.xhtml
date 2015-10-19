@@ -20,13 +20,17 @@
 	<h:form id="form">
 		<p:growl id="msgs" showDetail="true" />
 
+
+		<p:growl id="growl" showDetail="true" />
+
+		
+
+
 		<p:commandButton value="Cadastrar"
 			action="cadastrousuario.xhtml?faces-redirect=true" />
 		<p:dataTable id="usuarios" var="usuario"
 			value="#{usuarioController.usuarios}" editable="true"
-			style="margin-bottom:20px"
-			rows = "10"
-			paginator="true"
+			style="margin-bottom:20px" rows="10" paginator="true"
 			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 			rowsPerPageTemplate="10,25,50">
 			<f:facet name="header">
@@ -38,7 +42,8 @@
 			<p:ajax event="rowEditCancel"
 				listener="#{usuarioController.onRowCancel}" update=":form:msgs" />
 
-			<p:column headerText="Usuário" sortBy="#{usuario.cdUsuario}" filterBy="#{usuario.cdUsuario}" >
+			<p:column headerText="Usuário" sortBy="#{usuario.cdUsuario}"
+				filterBy="#{usuario.cdUsuario}">
 				<p:cellEditor>
 					<f:facet name="output">
 						<h:outputText value="#{usuario.cdUsuario}" />
@@ -50,7 +55,8 @@
 				</p:cellEditor>
 			</p:column>
 
-			<p:column headerText="Nome" sortBy="#{usuario.nmUsuario}" filterBy="#{usuario.nmUsuario}" > 
+			<p:column headerText="Nome" sortBy="#{usuario.nmUsuario}"
+				filterBy="#{usuario.nmUsuario}">
 				<p:cellEditor>
 					<f:facet name="output">
 						<h:outputText value="#{usuario.nmUsuario}" />
@@ -62,7 +68,8 @@
 				</p:cellEditor>
 			</p:column>
 
-			<p:column headerText="CPF" sortBy="#{usuario.cpf}" filterBy="#{usuario.cpf}" >
+			<p:column headerText="CPF" sortBy="#{usuario.cpf}"
+				filterBy="#{usuario.cpf}">
 				<p:cellEditor>
 					<f:facet name="output">
 						<h:outputText value="#{usuario.cpf}" />
@@ -74,7 +81,8 @@
 				</p:cellEditor>
 			</p:column>
 
-			<p:column headerText="Data de Nascimento" sortBy="#{usuario.dtNascimento}" filterBy="#{usuario.dtNascimento}" >
+			<p:column headerText="Data de Nascimento"
+				sortBy="#{usuario.dtNascimento}" filterBy="#{usuario.dtNascimento}">
 				<p:cellEditor>
 					<f:facet name="output">
 						<h:outputText value="#{usuario.dtNascimento}" />
@@ -85,8 +93,9 @@
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
-			
-			<p:column headerText="Data de Cadastro" sortBy="#{usuario.dtCadastro}">
+
+			<p:column headerText="Data de Cadastro"
+				sortBy="#{usuario.dtCadastro}">
 				<p:cellEditor>
 					<f:facet name="output">
 						<h:outputText value="#{usuario.dtCadastro}" />
