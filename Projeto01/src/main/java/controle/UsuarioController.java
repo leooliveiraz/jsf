@@ -113,8 +113,9 @@ public class UsuarioController implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 	
-	public void selectUserFromDialog(Usuario car) {
-        RequestContext.getCurrentInstance().closeDialog(car);
+	public void selectUserFromDialog(Usuario usuario) {
+        RequestContext.getCurrentInstance().closeDialog(usuario);
+        
     }
 
 	@PostConstruct
