@@ -1,5 +1,6 @@
 package controle;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.faces.application.FacesMessage;
@@ -17,8 +18,12 @@ import util.HibernateUtil;
 
 @ManagedBean(name="loginController")
 @SessionScoped
-public class LoginController {
+public class LoginController implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String cdUsuario;
 	private String nmUsuario;
 	private String cpf;

@@ -4,59 +4,10 @@
 <hibernate-reverse-engineering>
 	<type-mapping>
 		<sql-type jdbc-type="VARCHAR" hibernate-type="string"></sql-type>
+		<sql-type jdbc-type="VARCHAR" hibernate-type="string"></sql-type>
 	</type-mapping>
-	<table-filter match-schema="rfid_maternidade" match-name=".*"></table-filter>
-	<table-filter match-name="alertas"
+	<table-filter match-name="ultimas_movimentacoes"
 		match-catalog="rfid_maternidade">
 	</table-filter>
-	<table-filter match-name="antenas"
-		match-catalog="rfid_maternidade">
-	</table-filter>
-	<table-filter match-name="atendimento"
-		match-catalog="rfid_maternidade">
-	</table-filter>
-	<table-filter match-name="autorizacao_saida"
-		match-catalog="rfid_maternidade">
-	</table-filter>
-	<table-filter match-name="contato_responsavel"
-		match-catalog="rfid_maternidade">
-	</table-filter>
-	<table-filter match-name="modulo"
-		match-catalog="rfid_maternidade">
-	</table-filter>
-	<table-filter match-name="movimentacao_paciente"
-		match-catalog="rfid_maternidade">
-	</table-filter>
-	<table-filter match-name="observacoes"
-		match-catalog="rfid_maternidade">
-	</table-filter>
-	<table-filter match-name="paciente"
-		match-catalog="rfid_maternidade">
-	</table-filter>
-	<table-filter match-name="responsavel"
-		match-catalog="rfid_maternidade">
-	</table-filter>
-	<table-filter match-name="responsavel_paciente"
-		match-catalog="rfid_maternidade">
-	</table-filter>
-	<table-filter match-name="setor" match-catalog="rfid_maternidade"></table-filter>
-	<table-filter match-name="setor_has_atendimento"
-		match-catalog="rfid_maternidade">
-	</table-filter>
-	<table-filter match-name="tags" match-catalog="rfid_maternidade"></table-filter>
-	<table-filter match-name="tags_atendimento"
-		match-catalog="rfid_maternidade">
-	</table-filter>
-	<table-filter match-name="tipo_alerta"
-		match-catalog="rfid_maternidade">
-	</table-filter>
-	<table-filter match-name="tipo_contato"
-		match-catalog="rfid_maternidade">
-	</table-filter>
-	<table-filter match-name="usuario"
-		match-catalog="rfid_maternidade">
-	</table-filter>
-	<table-filter match-name="usuario_has_modulo"
-		match-catalog="rfid_maternidade">
-	</table-filter>
+	<table catalog="rfid_maternidade" name="ultimas_movimentacoes"></table>
 </hibernate-reverse-engineering>

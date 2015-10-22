@@ -24,24 +24,38 @@
 			<p:commandButton value="Usuários" onclick="PF('dlg').show();"
 				type="button" />
 
-			<p:dialog header="Escolha um Paciente" widgetVar="dlg" dynamic="true" width="900px">
-				<p:dataTable var="usuario" value="#{usuarioController.usuarios}">
-					<p:column headerText="CD">
-						<h:outputText value="#{usuario.cdUsuario}" />
+			<p:dialog header="Escolha um Paciente" widgetVar="dlg" dynamic="true"
+				width="900px">
+				<p:dataTable var="paciente1"
+					value="#{atendimentoController.listaPaciente}">
+					<p:column headerText="CD" filterBy="#{paciente1.cdPaciente}">
+						<h:outputText value="#{paciente1.cdPaciente}" />
 					</p:column>
 
-					<p:column headerText="Nome">
-						<h:outputText value="#{usuario.nmUsuario}" />
+					<p:column headerText="Nome" filterBy="#{paciente1.nmPaciente}">
+						<h:outputText value="#{paciente1.nmPaciente}" />
 					</p:column>
 
-					<p:column headerText="Senha">
-						<h:outputText value="#{usuario.senha}" />
+					<p:column headerText="Mãe" filterBy="#{paciente1.nmMae}">
+						<h:outputText value="#{paciente1.nmMae}" />
+					</p:column>
+					<p:column headerText="Pai" filterBy="#{paciente1.nmPai}">
+						<h:outputText value="#{paciente1.nmPai}" />
+					</p:column>
+					<p:column headerText="Data de Nascimento"
+						filterBy="#{paciente1.dtNascimento}">
+						<h:outputText value="#{paciente1.dtNascimento}" />
 					</p:column>
 
 					<p:column style="width:32px;text-align: center">
-						<p:commandButton icon="ui-icon-search" />
+						<p:commandButton icon="ui-icon-search" onclick="dlg.hide()">
+							<f:setPropertyActionListener
+								target="#{atendimentoController.cdPaciente}" value="#{paciente1.cdPaciente}" />
+						</p:commandButton>
 					</p:column>
 				</p:dataTable>
+
+
 			</p:dialog>
 
 
