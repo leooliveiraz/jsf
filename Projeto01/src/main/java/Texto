@@ -1,0 +1,22 @@
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `root`@`localhost` 
+    SQL SECURITY DEFINER
+VIEW `ultimas_movimentacoes` AS
+    select 
+        `ta`.`cd_tag_atendimento` AS `cd_tag_atendimento`,
+        `mov`.`antenas_cd_antena` AS `antenas_cd_antena`,
+        max(`mov`.`cd_movimentacao`) AS `CD_MOVIMENTACAO`,
+        `mov`.`dt_movimentacao` AS `DT_MOVIMENTACAO`
+    from
+        (((`movimentacao_atendimentos` `mov`
+        join `tags_atendimento` `ta`)
+        join `atendimento` `ate`)
+        join `paciente` `pac`)
+    where
+        ((`mov`.`tags_cd_tag` = `ta`.`tags_cd_tag`)
+            and (`ate`.`cd_atendimento` = `ta`.`atendimento_cd_atendimento`)
+            and (`ate`.`cd_paciente` = `pac`.`cd_paciente`)
+            and (`ta`.`sn_ativo` = 'S')
+            and isnull(`ate`.`DT_ALTA`))
+    group by `ate`.`cd_atendimento` , `ta`.`cd_tag_atendimento`
