@@ -13,7 +13,7 @@ import entidades.MovimentacaoAtendimentos;
 import entidades.UltimasMovimentacoes;
 
 public class DaoUltimasMovimentacoesTest {
-
+/*
 	@Test
 	public void testBuscaTodos() {
 		try{
@@ -32,6 +32,6 @@ public class DaoUltimasMovimentacoesTest {
 		catch(Exception e){
 			fail("Not yet implemented");
 		}
-	}
+	}*/
 
 }
