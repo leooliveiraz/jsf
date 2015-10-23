@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Cadastro de Responsáveis</title>
+</h:head>
+
+<h:body>
+
+	<ui:include src="/cabecalho.xhtml" />
+	<h:form>
+
+
+		<p:panel header="Cadastro de Responsáveis" style="margin-bottom:20px">
+			
+		<p:messages id="mensagens" showDetail="true" showSummary="false" />
+
+
+			<h:panelGrid columns="2">
+				<p:outputLabel value="Nome:" />
+				<p:inputText value="#{responsavelController.nmResponsavel}" />
+
+				<p:outputLabel value="CPF:" />
+				<p:inputText value="#{responsavelController.cpf}" />
+				
+
+				<p:outputLabel value="Celular 1:" />
+				<p:inputText value="#{responsavelController.celular1}" />				
+				
+				<p:outputLabel value="Celular 2:" />
+				<p:inputText value="#{responsavelController.celular2}" />
+
+				<p:outputLabel value="Telefone Residencial:" />
+				<p:inputText value="#{responsavelController.telefone}" />
+
+				<p:outputLabel value="Telefone Comercial" />
+				<p:inputText value="#{responsavelController.telefoneComercial}" />
+				
+				<p:outputLabel value="Email" />
+				<p:inputText value="#{responsavelController.email}" />
+				<p:commandButton value="Cadastrar"
+					 onclick="tabelaresponsavel.xhtml?faces-redirect=true" />
+				<p:commandButton value="Voltar" 
+					action="tabelaresponsavel.xhtml?faces-redirect=true" />
+
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+
+</h:body>
+
+
+</html>

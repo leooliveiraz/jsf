@@ -18,5 +18,6 @@
   <mapping class="entidades.MovimentacaoAtendimentos"/>
   <mapping class="entidades.Usuario"/>
   <mapping class="entidades.Paciente"/>
+  <mapping class="entidades.Responsavel"/>
  </session-factory>
 </hibernate-configuration>
