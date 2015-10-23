@@ -45,7 +45,7 @@
 				<p:outputLabel value="Email" />
 				<p:inputText value="#{responsavelController.email}" />
 				<p:commandButton value="Cadastrar"
-					 onclick="tabelaresponsavel.xhtml?faces-redirect=true" />
+					 onclick="#{responsavelController.salvar}" />
 				<p:commandButton value="Voltar" 
 					action="tabelaresponsavel.xhtml?faces-redirect=true" />
 
