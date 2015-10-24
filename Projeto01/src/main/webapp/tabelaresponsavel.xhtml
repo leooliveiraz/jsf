@@ -44,20 +44,20 @@
 						<h:outputText value="#{responsavel.cdResponsavel}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText id="modelInput" value="#{responsavel.cdResponsavel}"
+						<p:inputText id="cd_responsavel" value="#{responsavel.cdResponsavel}"
 							style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
 
-			<p:column headerText="Descrição" sortBy="#{responsavel.nmResponsavel}"
+			<p:column headerText="Nome" sortBy="#{responsavel.nmResponsavel}"
 				filterBy="#{responsavel.nmResponsavel}">
 				<p:cellEditor>
 					<f:facet name="output">
 						<h:outputText value="#{responsavel.nmResponsavel}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText value="#{responsavel.nmResponsavel}" style="width:100%" />
+						<p:inputText id="nm_responsavel" value="#{responsavel.nmResponsavel}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
@@ -69,7 +69,7 @@
 						<h:outputText value="#{responsavel.cpf}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText value="#{responsavel.cpf}" style="width:100%" />
+						<p:inputText id="cpf_responsavel" value="#{responsavel.cpf}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
@@ -81,7 +81,7 @@
 						<h:outputText value="#{responsavel.celular1}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText value="#{responsavel.celular1}" style="width:100%" />
+						<p:inputText id="celular_responsavel" value="#{responsavel.celular1}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
@@ -93,7 +93,7 @@
 						<h:outputText value="#{responsavel.celular2}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText value="#{responsavel.celular2}" style="width:100%" />
+						<p:inputText id="celular2_responsavel" value="#{responsavel.celular2}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
@@ -105,36 +105,35 @@
 						<h:outputText value="#{responsavel.telefone}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText value="#{responsavel.telefone}" style="width:100%" />
+						<p:inputText id="telefone_responsavel" value="#{responsavel.telefone}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
 
 
-			<p:column headerText="Telefone" sortBy="#{responsavel.telefoneComercial}"
+			<p:column headerText="Telefone Comercial" sortBy="#{responsavel.telefoneComercial}"
 				filterBy="#{responsavel.telefoneComercial}">
 				<p:cellEditor>
 					<f:facet name="output">
 						<h:outputText value="#{responsavel.telefoneComercial}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText value="#{responsavel.telefoneComercial}" style="width:100%" />
+						<p:inputText id="telefone_comercial_responsavel" value="#{responsavel.telefoneComercial}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
 			
-			<p:column headerText="Telefone" sortBy="#{responsavel.email}"
+			<p:column headerText="Email" sortBy="#{responsavel.email}"
 				filterBy="#{responsavel.email}">
 				<p:cellEditor>
 					<f:facet name="output">
 						<h:outputText value="#{responsavel.email}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText value="#{responsavel.email}" style="width:100%" />
+						<p:inputText id="email_responsavel" value="#{responsavel.email}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
-
 
 
 			<p:column style="width:32px">

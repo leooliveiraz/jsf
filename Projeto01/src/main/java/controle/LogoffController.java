@@ -8,17 +8,19 @@ import javax.servlet.http.HttpSession;
 @ManagedBean(name="logoffController")
 @RequestScoped
 public class LogoffController {
+	
 	public String realizaLogoff(){
 		try{
 			System.out.println("certo");
 			FacesContext fc = FacesContext.getCurrentInstance();  
 			HttpSession session = (HttpSession)fc.getExternalContext().getSession(false);  
 			session.invalidate();
-			return "login.xhtml";  
+			return "";  
 		}
 		catch(Exception e){
 			System.out.println(e.getMessage());
-			return "login.xhtml";
+			e.printStackTrace();
+			return "";
 
 		}
 	}

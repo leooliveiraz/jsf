@@ -1,7 +1,13 @@
 package persistencia;
 
-import org.hibernate.Session;
+import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
+
+import util.HibernateUtil;
 import entidades.Atendimento;
 
 public class DaoAtendimento extends GenericDao<Atendimento>{
@@ -10,5 +16,15 @@ public class DaoAtendimento extends GenericDao<Atendimento>{
 		super(classe, session);
 		// TODO Auto-generated constructor stub
 	}
-
+	public Atendimento buscaUltimoRegistro( Session session) {
+		Criteria crit = session.createCriteria(Atendimento.class);  
+		crit.setMaxResults(1); 
+		crit.addOrder(Order.desc("cdAtendimento"));
+		Atendimento atendimento = (Atendimento) crit.uniqueResult(); 
+	
+		
+		return atendimento;
+		// TODO Auto-generated constructor stub
+	}
+	
 }

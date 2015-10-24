@@ -23,7 +23,7 @@ public class GenericDao<T> {
 	}
 	
 	public void salvar(T classe){
-		this.session.save(classe);
+		this.session.save(classe);		
 	}
 
 	public void atualizar(T classe){
@@ -39,6 +39,8 @@ public class GenericDao<T> {
 		criterio.add(Restrictions.eq("id", id));
 		return (T) criterio.uniqueResult();
 	}
+	
+	
 	
 	public List<T> buscaPaginada ( int inicio, int fim){
 		Criteria criterio = session.createCriteria(this.classe);

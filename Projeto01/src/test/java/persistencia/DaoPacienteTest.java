@@ -2,6 +2,7 @@ package persistencia;
 
 import static org.junit.Assert.*;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -37,10 +38,8 @@ public class DaoPacienteTest {
 	public void testeUltimoReg(){
 		Session session = HibernateUtil.getSession();
 		DaoPaciente dao = new DaoPaciente(Paciente.class, session);
-		Paciente paciente =dao.ultimoRegistro();
-		System.out.println(paciente.getCdPaciente());
+		dao.ultimoRegistro();
+		session.close();
 		
 	}
-	
-
 }

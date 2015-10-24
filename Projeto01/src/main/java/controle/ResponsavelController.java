@@ -93,7 +93,7 @@ public class ResponsavelController implements Serializable {
 	}
 	
 
-	public void salvar() {
+	public String salvar() {
 		try{
 			Responsavel responsavel = new Responsavel();
 			responsavel.setNmResponsavel(this.nmResponsavel);
@@ -110,9 +110,12 @@ public class ResponsavelController implements Serializable {
 			dao.salvar(responsavel);
 			session.getTransaction().commit();
 			session.close();	
-			
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Cadastrado com sucesso."));
+			return "tabelaresponsavel.xhtml";
 		}catch(Exception e){
-			e.printStackTrace();		
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Erro:"+e.getMessage()));
+			return "tabelaresponsavel.xhtml";		
 		}
 	}
 	

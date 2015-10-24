@@ -58,6 +58,25 @@ public class Paciente implements java.io.Serializable {
 		this.uf = uf;
 		this.observacao = observacao;
 	}
+	
+	public Paciente( String nmPaciente, String cpf,
+			Date dtNascimento, String sexo, String nmMae, String nmPai,
+			String cep, String logradouro, Integer numero, String complemento,
+			String cidade, String uf, String observacao) {
+		this.nmPaciente = nmPaciente;
+		this.cpf = cpf;
+		this.dtNascimento = dtNascimento;
+		this.sexo = sexo;
+		this.nmMae = nmMae;
+		this.nmPai = nmPai;
+		this.cep = cep;
+		this.logradouro = logradouro;
+		this.numero = numero;
+		this.complemento = complemento;
+		this.cidade = cidade;
+		this.uf = uf;
+		this.observacao = observacao;
+	}
 
 	@Id
 	@Column(name = "cd_paciente", unique = true, nullable = false)

@@ -16,36 +16,170 @@ import org.primefaces.event.RowEditEvent;
 
 import entidades.Atendimento;
 import entidades.Paciente;
+import entidades.Tags;
+import entidades.TagsAtendimento;
 import entidades.Usuario;
 import persistencia.DaoAtendimento;
 import persistencia.DaoPaciente;
+import persistencia.DaoTags;
+import persistencia.DaoTagsAtendimento;
 import persistencia.GenericDao;
 import util.HibernateUtil;
 
 @ManagedBean(name="atendimentoController")
 @ViewScoped
 public class AtendimentoController implements Serializable {
-	private Atendimento atendimento;
+
 	private List<Atendimento> lista;
 	private List<Paciente> listaPaciente;
-	
+	private List<Tags> listaTags;
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private int cdAtendimento;
 	private int cdPaciente;
-	private int nmPaciente;
+	private String nmPaciente;
 	private Date dtAtendimento;
 	private Date dtAlta;
 	private String cdUsuarioSaida;
 	private String cdUsuarioEntrada;	
-	
-	
-	
-	public int getNmPaciente() {
+	private Atendimento atendimento;
+
+	private String paciente_cpf;
+	private Date paciente_dtNascimento;
+	private String paciente_sexo;
+	private String paciente_nmMae;
+	private String paciente_nmPai;
+	private String paciente_cep;
+	private String paciente_logradouro;
+	private Integer paciente_numero;
+	private String paciente_complemento;
+	private String paciente_cidade;
+	private String paciente_uf;
+	private String paciente_observacao;
+
+
+	private String tag_vinculada;
+	private int cd_tag;
+
+
+	public int getCd_tag() {
+		return cd_tag;
+	}
+
+	public void setCd_tag(int cd_tag) {
+		this.cd_tag = cd_tag;
+	}
+
+	public String getTag_vinculada() {
+		return tag_vinculada;
+	}
+
+	public void setTag_vinculada(String tag_vinculada) {
+		this.tag_vinculada = tag_vinculada;
+	}
+
+	public String getPaciente_cpf() {
+		return paciente_cpf;
+	}
+
+	public void setPaciente_cpf(String paciente_cpf) {
+		this.paciente_cpf = paciente_cpf;
+	}
+
+	public Date getPaciente_dtNascimento() {
+		return paciente_dtNascimento;
+	}
+
+	public void setPaciente_dtNascimento(Date paciente_dtNascimento) {
+		this.paciente_dtNascimento = paciente_dtNascimento;
+	}
+
+	public String getPaciente_sexo() {
+		return paciente_sexo;
+	}
+
+	public void setPaciente_sexo(String paciente_sexo) {
+		this.paciente_sexo = paciente_sexo;
+	}
+
+	public String getPaciente_nmMae() {
+		return paciente_nmMae;
+	}
+
+	public void setPaciente_nmMae(String paciente_nmMae) {
+		this.paciente_nmMae = paciente_nmMae;
+	}
+
+	public String getPaciente_nmPai() {
+		return paciente_nmPai;
+	}
+
+	public void setPaciente_nmPai(String paciente_nmPai) {
+		this.paciente_nmPai = paciente_nmPai;
+	}
+
+	public String getPaciente_cep() {
+		return paciente_cep;
+	}
+
+	public void setPaciente_cep(String paciente_cep) {
+		this.paciente_cep = paciente_cep;
+	}
+
+	public String getPaciente_logradouro() {
+		return paciente_logradouro;
+	}
+
+	public void setPaciente_logradouro(String paciente_logradouro) {
+		this.paciente_logradouro = paciente_logradouro;
+	}
+
+	public Integer getPaciente_numero() {
+		return paciente_numero;
+	}
+
+	public void setPaciente_numero(Integer paciente_numero) {
+		this.paciente_numero = paciente_numero;
+	}
+
+	public String getPaciente_complemento() {
+		return paciente_complemento;
+	}
+
+	public void setPaciente_complemento(String paciente_complemento) {
+		this.paciente_complemento = paciente_complemento;
+	}
+
+	public String getPaciente_cidade() {
+		return paciente_cidade;
+	}
+
+	public void setPaciente_cidade(String paciente_cidade) {
+		this.paciente_cidade = paciente_cidade;
+	}
+
+	public String getPaciente_uf() {
+		return paciente_uf;
+	}
+
+	public void setPaciente_uf(String paciente_uf) {
+		this.paciente_uf = paciente_uf;
+	}
+
+	public String getPaciente_observacao() {
+		return paciente_observacao;
+	}
+
+	public void setPaciente_observacao(String paciente_observacao) {
+		this.paciente_observacao = paciente_observacao;
+	}
+
+	public String getNmPaciente() {
 		return nmPaciente;
 	}
 
-	public void setNmPaciente(int nmPaciente) {
+	public void setNmPaciente(String nmPaciente) {
 		this.nmPaciente = nmPaciente;
 	}
 
@@ -71,6 +205,15 @@ public class AtendimentoController implements Serializable {
 
 	public void setListaPaciente(List<Paciente> listaPaciente) {
 		this.listaPaciente = listaPaciente;
+	}
+
+
+	public List<Tags> getListaTags() {
+		return listaTags;
+	}
+
+	public void setListaTags(List<Tags> listaTags) {
+		this.listaTags = listaTags;
 	}
 
 	public int getCdAtendimento() {
@@ -121,28 +264,44 @@ public class AtendimentoController implements Serializable {
 		this.cdUsuarioEntrada = cdUsuarioEntrada;
 	}
 
-		public static long getSerialversionuid() {
+	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
 	@PostConstruct
 	public void iniciar(){
 		buscaPacientes();
+		buscaTagsVinculo();
 	}	
-	
+
+
+
 	public String cadastraAtendimento(){
-		Atendimento atendimento = new Atendimento(this.cdPaciente, new Date(),this.cdUsuarioEntrada);
-		Session session = new HibernateUtil().getSession();
-		DaoAtendimento dao = new DaoAtendimento(Atendimento.class, session);
-		session.beginTransaction();
-		dao.salvar(atendimento);
-		session.getTransaction().commit();
-		session.close();
-		
+		try{
+			this.dtAtendimento = new Date();
+			Atendimento atendimento = new Atendimento(this.cdPaciente, new Date(),this.cdUsuarioEntrada);
+			Session session = new HibernateUtil().getSession();
+			DaoAtendimento dao = new DaoAtendimento(Atendimento.class, session);
+			session.beginTransaction();
+			dao.salvar(atendimento);
+			session.getTransaction().commit();
+
+			this.atendimento = dao.buscaUltimoRegistro(session );
+			this.cdAtendimento = this.atendimento.getCdAtendimento();
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Cadastrado Atendimento:"+cdAtendimento));
+			
+			session.close();
+		}catch(Exception e){
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", "Não Foi possivel cadastrar o Atendimento"));
+			
+		}
+		vinculaTag();	
+
 		return "home.xhtml";
 	}
-	
-	
+
+
 	public void buscaPacientes(){		
 		try{
 
@@ -152,15 +311,60 @@ public class AtendimentoController implements Serializable {
 			DaoPaciente dao = new DaoPaciente(Paciente.class,session);
 			this.listaPaciente = dao.buscaTodos();
 			session.close();
-			
-			for (int i = 0;i<listaPaciente.size();i++){
-				System.out.println(listaPaciente.get(i).getCdPaciente()+" "+listaPaciente.get(i).getNmPaciente()+" "+listaPaciente.get(i).getCpf());
-			}
 		} 	catch(Exception e){
 			System.out.println(e.getMessage()+",\n"+e.getCause());
 			//e.printStackTrace();
 		}
-		
+
+	}
+	public void buscaTagsVinculo(){		
+		try{
+
+			Session session = HibernateUtil.getSession();
+			session.beginTransaction();
+
+			DaoTags dao = new DaoTags(Tags.class,session);
+			this.listaTags = dao.buscaTagsAtivas(session);
+			session.close();
+		} 	catch(Exception e){
+			System.out.println(e.getMessage()+",\n"+e.getCause());
+			//e.printStackTrace();
+		}
+
+	}
+
+	public void cadastraPacientes(){
+		Paciente paciente = new Paciente(this.nmPaciente, this.paciente_cpf, this.paciente_dtNascimento, this.paciente_sexo, this.paciente_nmMae, this.paciente_nmPai, this.paciente_cep, this.paciente_logradouro, this.paciente_numero, this.paciente_complemento, this.paciente_cidade, this.paciente_uf, this.paciente_observacao);
+		try{
+			Session session = HibernateUtil.getSession();
+			DaoPaciente dao = new DaoPaciente(Paciente.class, session);
+			session.beginTransaction();
+			dao.salvar(paciente);
+			session.getTransaction().commit();
+			this.cdPaciente = dao.ultimoRegistro();
+			buscaPacientes();
+			session.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	
+	public void vinculaTag(){
+		try{
+			Session session = HibernateUtil.getSession();
+			DaoTagsAtendimento daoVinculo = new DaoTagsAtendimento(TagsAtendimento.class, session);
+			DaoTags daoTag = new DaoTags(Tags.class, session);
+			session.beginTransaction();
+			TagsAtendimento tagsAtendimento = new TagsAtendimento(this.cdUsuarioEntrada,this.cdAtendimento,this.tag_vinculada,"S",new Date());
+			daoTag.atualizar(new Tags(this.cd_tag,this.tag_vinculada,"S","S"));
+			daoVinculo.salvar(tagsAtendimento);
+			session.getTransaction().commit();	
+			
+			session.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+
+
 }

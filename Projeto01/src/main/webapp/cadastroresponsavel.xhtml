@@ -24,28 +24,28 @@
 
 			<h:panelGrid columns="2">
 				<p:outputLabel value="Nome:" />
-				<p:inputText value="#{responsavelController.nmResponsavel}" />
+				<p:inputText value="#{responsavelController.nmResponsavel}" id="nome_responsavel"/>
 
 				<p:outputLabel value="CPF:" />
-				<p:inputText value="#{responsavelController.cpf}" />
+				<p:inputText value="#{responsavelController.cpf}" id ="cpf_responsavel" />
 				
 
-				<p:outputLabel value="Celular 1:" />
+				<p:outputLabel value="Celular 1:" id="celular1"/>
 				<p:inputText value="#{responsavelController.celular1}" />				
 				
-				<p:outputLabel value="Celular 2:" />
+				<p:outputLabel value="Celular 2:" id="celular2"/>
 				<p:inputText value="#{responsavelController.celular2}" />
 
-				<p:outputLabel value="Telefone Residencial:" />
+				<p:outputLabel value="Telefone Residencial:" id="telefone" />
 				<p:inputText value="#{responsavelController.telefone}" />
 
-				<p:outputLabel value="Telefone Comercial" />
+				<p:outputLabel value="Telefone Comercial" id="telefone_comercial" />
 				<p:inputText value="#{responsavelController.telefoneComercial}" />
 				
-				<p:outputLabel value="Email" />
+				<p:outputLabel value="Email" id="email"/>
 				<p:inputText value="#{responsavelController.email}" />
 				<p:commandButton value="Cadastrar"
-					 onclick="#{responsavelController.salvar}" />
+					 action="#{responsavelController.salvar}" />
 				<p:commandButton value="Voltar" 
 					action="tabelaresponsavel.xhtml?faces-redirect=true" />
 

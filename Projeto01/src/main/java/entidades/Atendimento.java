@@ -3,6 +3,7 @@ package entidades;
 // Generated 01/09/2015 00:07:35 by Hibernate Tools 4.0.0
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -24,7 +25,13 @@ public class Atendimento implements java.io.Serializable {
 	private String cdUsuarioSaida;
 	private String cdUsuarioEntrada;
 
-	public Atendimento() {
+	public Atendimento(){
+		
+	}
+	
+	public Atendimento(int paciente, String usuario) {
+		this.cdPaciente = paciente;
+		this.cdUsuarioEntrada = usuario;
 	}
 
 	public Atendimento(int cdAtendimento, int cdPaciente,
@@ -63,7 +70,7 @@ public class Atendimento implements java.io.Serializable {
 		this.cdPaciente = cdPaciente;
 	}
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "dt_atendimento", length = 10)
 	public Date getDtAtendimento() {
 		return this.dtAtendimento;
@@ -73,17 +80,17 @@ public class Atendimento implements java.io.Serializable {
 		this.dtAtendimento = dtAtendimento;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "dt_autorizacao_saida", length = 10)
-	public Date getDtAutorizacaoSaida() {
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "dt_alta", length = 10)
+	public Date getDtAlta() {
 		return this.dtAlta;
 	}
 
-	public void setDtAutorizacaoSaida(Date dtAutorizacaoSaida) {
-		this.dtAlta = dtAutorizacaoSaida;
+	public void setDtAlta(Date dt_alta) {
+		this.dtAlta = dt_alta;
 	}
 
-	@Column(name = "cd_usuario_saida", nullable = false, length = 20)
+	@Column(name = "cd_usuario_saida", length = 20)
 	public String getCdUsuarioSaida() {
 		return this.cdUsuarioSaida;
 	}
