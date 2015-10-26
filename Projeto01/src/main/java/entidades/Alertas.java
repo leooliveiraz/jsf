@@ -2,6 +2,8 @@ package entidades;
 
 // Generated 01/09/2015 00:07:35 by Hibernate Tools 4.0.0
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
@@ -23,6 +25,37 @@ public class Alertas implements java.io.Serializable {
 	private int cdAlerta;
 	private int cdTipoAlerta;
 	private int cdMovimentacao;
+	private String sn_verificado;
+	private String cd_usuario;
+	private Date dt_verificado;
+	
+	
+	@Column(name = "sn_verificado", nullable = false)
+	public String getSn_verificado() {
+		return sn_verificado;
+	}
+
+	public void setSn_verificado(String sn_verificado) {
+		this.sn_verificado = sn_verificado;
+	}
+
+	@Column(name = "cd_usuario", nullable = false)
+	public String getCd_usuario() {
+		return cd_usuario;
+	}
+
+	public void setCd_usuario(String cd_usuario) {
+		this.cd_usuario = cd_usuario;
+	}
+
+	@Column(name = "dt_verificado", nullable = false)
+	public Date getDt_verificado() {
+		return dt_verificado;
+	}
+
+	public void setDt_verificado(Date dt_verificado) {
+		this.dt_verificado = dt_verificado;
+	}
 
 	public Alertas() {
 	}
@@ -37,6 +70,12 @@ public class Alertas implements java.io.Serializable {
 		this.cdAlerta = cdAlerta;
 		this.cdTipoAlerta = tipoAlertaCdTipoAlerta;
 		this.cdMovimentacao = cdMovimentacao;
+	}
+	public Alertas(int tipoAlertaCdTipoAlerta,int cdMovimentacao,String sn) {
+		this.cdAlerta = cdAlerta;
+		this.cdTipoAlerta = tipoAlertaCdTipoAlerta;
+		this.cdMovimentacao = cdMovimentacao;
+		this.sn_verificado =sn;
 	}
 	@Column(name = "cd_alerta", nullable = false)
 	public int getCdAlerta() {

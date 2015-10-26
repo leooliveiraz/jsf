@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Tabela de Ultimas Movimentações</title>
+</h:head>
+
+<h:body>
+
+	<ui:include src="/cabecalho.xhtml" />
+
+	<h:form>
+
+		<p:growl id="msgs" showDetail="true" />
+		<p:panel id="form" header="Ultimos alertas registrados">
+			<p:poll interval="10" listener="#{alertaController.buscaMovimentacoes}" update="form"/>
+			<p:dataTable var="alerta"
+				value="#{alertaController.listaAlertasGerados}" paginator="true"
+				rows="10"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="10,25,50">
+
+				<p:column headerText="Alertas"
+					orderBy="#{alerta.cd_alerta}"
+					sortBy="#{alerta.cd_alerta}">
+					<h:outputText value="#{alerta.cd_alerta}" />
+				</p:column>
+
+				<p:column headerText="Atendimento"
+					orderBy="#{alerta.cd_atendimento}"
+					filterBy="#{alerta.cd_atendimento}">
+					<h:outputText value="#{alerta.cd_atendimento}" />
+				</p:column>
+
+				<p:column headerText="Paciente" width="100"
+					orderBy="#{alerta.nm_paciente}"
+					filterBy="#{alerta.nm_paciente}">
+					<h:outputText value="#{alerta.nm_paciente}" />
+				</p:column>
+
+				<p:column headerText="Data" orderBy="#{alerta.dt_movimentacao}"
+					filterBy="#{alerta.dt_movimentacao}">
+					<h:outputText value="#{alerta.dt_movimentacao}" />
+				</p:column>
+				<p:column headerText="Antena"
+					filterBy="#{alerta.ds_antena}"
+					orderBy="#{alerta.ds_antena}">
+					<h:outputText value="#{alerta.ds_antena}" />
+				</p:column>
+				<p:column headerText="Tipo de Alerta"
+					filterBy="#{alerta.ds_tipo_alerta}"
+					orderBy="#{alerta.ds_tipo_alerta}">
+					<h:outputText value="#{alerta.ds_tipo_alerta}" />
+				</p:column>
+
+				<p:column>
+					<p:commandButton icon="ui-icon-check" value="Verificado" action="#{alertaController.acionaVerificacao}">
+							<f:setPropertyActionListener
+								target="#{alertaController.alerta}"
+								value="#{alerta}" />
+							<f:setPropertyActionListener
+								target="#{alertaController.usuario}"
+								value="#{loginController.cdUsuario}" />
+						</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+</h:body>
+
+</html>

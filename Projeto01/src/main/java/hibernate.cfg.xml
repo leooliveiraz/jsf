@@ -23,5 +23,6 @@
   <mapping class="entidades.UltimasMovimentacoes"/>
   <mapping class="entidades.UltimasMovimentacoesDiferenca"/>
   <mapping class="entidades.Alertas"/>
+  <mapping class="entidades.AlertasGerados"/>
  </session-factory>
 </hibernate-configuration>
