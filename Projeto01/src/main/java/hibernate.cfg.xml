@@ -21,5 +21,7 @@
   <mapping class="entidades.Responsavel"/>
   <mapping class="entidades.TagsAtendimento"/>
   <mapping class="entidades.UltimasMovimentacoes"/>
+  <mapping class="entidades.UltimasMovimentacoesDiferenca"/>
+  <mapping class="entidades.Alertas"/>
  </session-factory>
 </hibernate-configuration>

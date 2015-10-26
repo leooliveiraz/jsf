@@ -25,6 +25,7 @@ public class QuartzApp {
                     JobDetail job = JobBuilder.newJob(ValidadorJob.class)
                                   .withIdentity("validadorJOB", "grupo01")
                                   .build();
+    				job.getJobDataMap().put("segundos", 5);
                     Trigger trigger = TriggerBuilder.newTrigger()
                                   .withIdentity("validadorTRIGGER","grupo01")
                                   .withSchedule(CronScheduleBuilder.cronSchedule("0/10 * * * * ?"))

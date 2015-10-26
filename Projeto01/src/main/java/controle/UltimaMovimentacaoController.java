@@ -24,7 +24,6 @@ public class UltimaMovimentacaoController implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	Session session = HibernateUtil.getSession();
 	private UltimasMovimentacoes ultimasMovimentacoes;
 	private List<UltimasMovimentacoes> lista;
 	private int numero=0;
@@ -120,8 +119,9 @@ public class UltimaMovimentacaoController implements java.io.Serializable {
 	}
 
 	public void buscaMovimentacoes(){
+
+		Session session = HibernateUtil.getSession();
 		DaoUltimasMovimentacoes dao = new DaoUltimasMovimentacoes(UltimasMovimentacoes.class, session);
-		lista = null;
 		lista = dao.buscaTodos();		
 	}
 	@PostConstruct
@@ -130,10 +130,9 @@ public class UltimaMovimentacaoController implements java.io.Serializable {
 	}
 	
 
-	public String contar(){
+	public void contar(){
 		buscaMovimentacoes();
 		numero = lista.get(lista.size()-1).getCdMovimentacao();
 		System.out.println(numero);
-		return "tabelaultimasmovimentacoes.xhtml";
 	}
 }

@@ -19,7 +19,7 @@
 
 		<p:growl id="msgs" showDetail="true" />
 		<p:panel id="form" header="Ultimas movimentações registradas">
-
+			<p:poll interval="10" listener="#{ultimaMovimentacaoController.buscaMovimentacoes}" update="form"/>
 			<p:dataTable var="movimentacao"
 				value="#{ultimaMovimentacaoController.lista}" paginator="true"
 				rows="10"

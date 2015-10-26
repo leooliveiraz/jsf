@@ -17,10 +17,15 @@
 
 	<h:form id="form">
 		<p:growl id="msgs" showDetail="true" />
+		<h:panelGrid columns="2">
+			<p:outputLabel value="Status do JOB:" />
+			<p:inputText value="#{jobController.snJobLigado}" disabled="true" />
+			<p:outputLabel value="Tempo para Execução do JOB:" />
+			<p:inputText value="#{jobController.segundos}" />
+		</h:panelGrid>
+		<p:commandButton value="Iniciar Job" action="#{jobController.rodar}" update="@all"/>
+		<p:commandButton value="Parar Job" action="#{jobController.parar}" update="@all" />
 
-		<p:commandButton value="Cadastrar"
-			action="#{jobController.rodar}" />
-		
 	</h:form>
 </h:body>
 
