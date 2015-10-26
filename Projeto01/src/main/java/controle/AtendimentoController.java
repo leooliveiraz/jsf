@@ -278,6 +278,7 @@ public class AtendimentoController implements Serializable {
 
 	public String cadastraAtendimento(){
 		try{
+			System.out.println(this.cdUsuarioEntrada);
 			this.dtAtendimento = new Date();
 			Atendimento atendimento = new Atendimento(this.cdPaciente, new Date(),this.cdUsuarioEntrada);
 			Session session = new HibernateUtil().getSession();
@@ -309,7 +310,7 @@ public class AtendimentoController implements Serializable {
 			session.beginTransaction();
 
 			DaoPaciente dao = new DaoPaciente(Paciente.class,session);
-			this.listaPaciente = dao.buscaTodos();
+			this.listaPaciente = dao.listaSemAtendimento(session);
 			session.close();
 		} 	catch(Exception e){
 			System.out.println(e.getMessage()+",\n"+e.getCause());
@@ -351,6 +352,7 @@ public class AtendimentoController implements Serializable {
 	
 	public void vinculaTag(){
 		try{
+			System.out.println("usuario é "+ this.cdUsuarioEntrada);
 			Session session = HibernateUtil.getSession();
 			DaoTagsAtendimento daoVinculo = new DaoTagsAtendimento(TagsAtendimento.class, session);
 			DaoTags daoTag = new DaoTags(Tags.class, session);
@@ -365,6 +367,6 @@ public class AtendimentoController implements Serializable {
 			e.printStackTrace();
 		}
 	}
-
+	
 
 }

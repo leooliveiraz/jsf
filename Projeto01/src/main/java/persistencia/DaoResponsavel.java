@@ -1,7 +1,12 @@
 package persistencia;
 
-import org.hibernate.Session;
+import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+
+import entidades.Paciente;
 import entidades.Responsavel;
 import entidades.ResponsavelPaciente;
 
@@ -12,5 +17,6 @@ public class DaoResponsavel extends GenericDao<Responsavel>{
 		super(classe, session);
 		// TODO Auto-generated constructor stub
 	}
+	
 
 }

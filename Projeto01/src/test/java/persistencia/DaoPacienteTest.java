@@ -42,4 +42,26 @@ public class DaoPacienteTest {
 		session.close();
 		
 	}
+	
+	@Test
+	public void testBuscaSemAtendimento() {
+		try{
+			List<Paciente> listaPaciente;
+			Session session = HibernateUtil.getSession();
+			session.beginTransaction();
+
+			DaoPaciente dao = new DaoPaciente(Paciente.class,session);
+			listaPaciente = dao.listaSemAtendimento(session);
+			session.close();
+
+			for (int i = 0;i<listaPaciente.size();i++){
+				System.out.println(listaPaciente.get(i).getCdPaciente()+" "+listaPaciente.get(i).getNmPaciente()+" "+listaPaciente.get(i).getCpf());
+			}
+		} 	catch(Exception e){
+			System.out.println(e.getMessage()+",\n"+e.getCause());
+			e.printStackTrace();
+			//e.printStackTrace();
+		}
+	}
+	
 }

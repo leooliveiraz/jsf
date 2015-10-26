@@ -21,9 +21,19 @@ public class DaoAtendimento extends GenericDao<Atendimento>{
 		crit.setMaxResults(1); 
 		crit.addOrder(Order.desc("cdAtendimento"));
 		Atendimento atendimento = (Atendimento) crit.uniqueResult(); 
-	
 		
 		return atendimento;
+		// TODO Auto-generated constructor stub
+	}
+	
+	public List<Atendimento> buscaAtendimentosSemAlta(Session session) {
+		Criteria crit = session.createCriteria(Atendimento.class);  
+		
+		crit.addOrder(Order.asc("cdAtendimento"));
+		crit.add(Restrictions.eqOrIsNull("dtAlta", null));
+		
+		
+		return (List<Atendimento>) crit.list(); 
 		// TODO Auto-generated constructor stub
 	}
 	

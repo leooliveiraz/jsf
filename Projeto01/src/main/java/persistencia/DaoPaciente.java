@@ -1,6 +1,7 @@
 package persistencia;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
@@ -35,9 +36,15 @@ public class DaoPaciente extends GenericDao<Paciente>{
 			e.printStackTrace();
 			return 0;
 		}
+	}
+	
 
-
-
+	public List<Paciente> listaSemAtendimento(Session session){
+		Criteria criterio = session.createCriteria(Paciente.class);
+		criterio.add(Restrictions.sqlRestriction("cd_Paciente not in(select cd_Paciente from atendimento where dt_alta is null)"));
+		
+		return (List<Paciente>) criterio.list();
+		
 	}
 
 }

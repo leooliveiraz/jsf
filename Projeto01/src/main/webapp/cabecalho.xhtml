@@ -26,7 +26,7 @@
 
 			<p:submenu label="Consultas" icon="ui-icon-document">
 				<p:submenu label="Movimentações">
-					<p:menuitem value="Pacientes por Setor" url="#" />
+					<p:menuitem value="Pacientes por Setor" url="tabelaultimasmovimentacoes.xhtml" />
 					<p:menuitem value="Alertas" url="#" />
 				</p:submenu>
 				<p:menuitem value="Atendimentos" url="#" />
@@ -58,7 +58,7 @@
 
 			<f:facet name="options">
 				<p:outputLabel value="Usuário: #{loginController.cdUsuario}  " />
-				<p:commandButton type="button" value="Sair" icon="ui-icon-extlink"
+				<p:commandButton type="button" value="Sair" icon="ui-icon-power"
 					action="#{logoffController.realizaLogoff}" />
 			</f:facet>
 		</p:menubar>

@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Tabela de Ultimas Movimentações</title>
+</h:head>
+
+<h:body>
+
+	<ui:include src="/cabecalho.xhtml" />
+
+	<h:form>
+
+		<p:growl id="msgs" showDetail="true" />
+		<p:panel id="form" header="Ultimas movimentações registradas">
+
+			<p:dataTable var="movimentacao"
+				value="#{ultimaMovimentacaoController.lista}" paginator="true"
+				rows="10"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="10,25,50">
+
+				<p:column headerText="Movimentação"
+					orderBy="#{movimentacao.cdMovimentacao}"
+					sortBy="#{movimentacao.cdMovimentacao}">
+					<h:outputText value="#{movimentacao.cdMovimentacao}" />
+				</p:column>
+
+				<p:column headerText="Atendimento"
+					orderBy="#{movimentacao.cdMovimentacao}"
+					filterBy="#{movimentacao.cdAtendimento}">
+					<h:outputText value="#{movimentacao.cdAtendimento}" />
+				</p:column>
+
+				<p:column headerText="Cd.Paciente" width="100"
+					orderBy="#{movimentacao.cdPaciente}"
+					filterBy="#{movimentacao.cdAtendimento}">
+					<h:outputText value="#{movimentacao.cdPaciente}" />
+				</p:column>
+
+				<p:column headerText="Paciente" orderBy="#{movimentacao.nmPaciente}"
+					filterBy="#{movimentacao.nmPaciente}">
+					<h:outputText value="#{movimentacao.nmPaciente}" />
+				</p:column>
+				<p:column headerText="Tag"
+					filterBy="#{movimentacao.cdTagFornecedor}"
+					orderBy="#{movimentacao.cdTagFornecedor}">
+					<h:outputText value="#{movimentacao.cdTagFornecedor}" />
+				</p:column>
+				<p:column headerText="Data"
+					filterBy="#{movimentacao.dtMovimentacao}"
+					orderBy="#{movimentacao.dtMovimentacao}">
+					<h:outputText value="#{movimentacao.dtMovimentacao}" />
+				</p:column>
+
+				<p:column headerText="Antena" filterBy="#{movimentacao.dsAntena}"
+					orderBy="#{movimentacao.dsAntena}">
+					<h:outputText value="#{movimentacao.dsAntena}" />
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+</h:body>
+
+</html>

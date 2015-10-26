@@ -14,7 +14,7 @@
 <h:body>
 
 	<ui:include src="/cabecalho.xhtml" />
-	<h:form>
+	<h:form id="form">
 
 
 		<p:panel header="Cadastro de Atendimento" style="margin-bottom:20px">
@@ -93,7 +93,8 @@
 				width="900px">
 
 				<p:dataTable var="paciente1"
-					value="#{atendimentoController.listaPaciente}" paginator="true" rows="10"
+					value="#{atendimentoController.listaPaciente}" paginator="true"
+					rows="10"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					rowsPerPageTemplate="10,25,50">
 					<p:column headerText="Código">
@@ -125,6 +126,7 @@
 								target="#{atendimentoController.cdPaciente}"
 								value="#{paciente1.cdPaciente}" />
 
+
 							<f:setPropertyActionListener
 								target="#{atendimentoController.nmPaciente}"
 								value="#{paciente1.nmPaciente}" />
@@ -150,9 +152,6 @@
 				<p:outputLabel value="Usuário Entrada" />
 				<p:inputText value="#{loginController.nmUsuario}" maxlength="100"
 					disabled="true" />
-
-
-
 			</h:panelGrid>
 
 			<p:commandButton value="Escolha uma Tag" onclick="PF('tag').show();"
@@ -161,10 +160,9 @@
 				widgetVar="tag" dynamic="true" width="900px" modal="true">
 
 				<p:dataTable var="tag" value="#{atendimentoController.listaTags}"
-				aginator="true" rows="10"
+				paginator="true" rows="10"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-					rowsPerPageTemplate="10,25,50"
-				>
+					rowsPerPageTemplate="10,25,50">
 					<p:column headerText="Código" sortBy="#{tag.cdTagFornecedor}"
 						filterBy="#{tag.cdTagFornecedor}">
 						<h:outputText value="#{tag.cdTagFornecedor}" />
@@ -196,12 +194,18 @@
 
 			<p:commandButton value="Cadastrar"
 				action="#{atendimentoController.cadastraAtendimento}">
+
+
 				<f:setPropertyActionListener
 					target="#{atendimentoController.cdUsuarioEntrada}"
-					value="#{usuarioController.cdUsuario}" />
+					value="#{loginController.cdUsuario}" />
 			</p:commandButton>
+
+
+			
 			<p:commandButton value="Limpar"
-				action="cadastroatendimento.xhtml?faces-redirect=true" />
+				action="cadastroatendimento.xhtml?faces-redirect=true"
+				update="@form" />
 
 
 		</p:panel>

@@ -28,5 +28,17 @@ public class DaoTags extends GenericDao<Tags> {
 			return null;
 		}
 	}
+	public Tags buscaTagsFornecedor(Session session, String cdTagFornecedor) {
+		try{
+			
+			Criteria criterio = session.createCriteria(Tags.class);
+			criterio.add(Restrictions.eq("cdTagFornecedor", cdTagFornecedor));
+			criterio.add(Restrictions.eq("snUso", "S"));
+			return  (Tags) criterio.uniqueResult();
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 }

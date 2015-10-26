@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Alta</title>
+</h:head>
+
+
+
+<h:body>
+
+	<ui:include src="/cabecalho.xhtml" />
+
+	<h:form id="form">
+		<p:growl id="msgs" showDetail="true" />
+		<p:growl id="growl" showDetail="true" />
+
+		<p:dataTable var="atendimento"
+			value="#{altaController.listaAtendimentos}" paginator="true"
+			rows="10"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="10,25,50">
+
+			<p:column headerText="Código" sortBy="#{atendimento.cdAtendimento}"
+				filterBy="#{atendimento.cdAtendimento}">
+				<h:outputText value="#{atendimento.cdAtendimento}" />
+			</p:column>
+
+			<p:column headerText="Paciente" sortBy="#{atendimento.cdPaciente}"
+				filterBy="#{atendimento.cdPaciente}">
+				<h:outputText value="#{atendimento.cdPaciente}" />
+			</p:column>
+
+			<p:column headerText="Data de Entrada"
+				sortBy="#{atendimento.dtAtendimento}"
+				filterBy="#{atendimento.dtAtendimento}">
+				<h:outputText value="#{atendimento.dtAtendimento}" />
+			</p:column>
+
+			<p:column headerText="Usuário Entrada"
+				sortBy="#{atendimento.cdUsuarioEntrada}"
+				filterBy="#{atendimento.cdUsuarioEntrada}">
+				<h:outputText value="#{atendimento.cdUsuarioEntrada}" />
+			</p:column>
+			<p:column style="width:32px;text-align: center">
+				<p:commandButton icon="ui-icon-check" onclick="PF('dlg').show()">
+
+					<f:setPropertyActionListener
+						target="#{altaController.cdUsuarioSaida}"
+						value="#{loginController.cdUsuario}" />
+					<f:setPropertyActionListener target="#{altaController.atendimento}"
+						value="#{atendimento}" />
+				</p:commandButton>
+				<p:dialog header="Confirmação" widgetVar="dlg" dynamic="true">
+					<p:outputLabel
+						value="Deseja confirmar a alta desse atendimento ? O vinculo com a tag será inativada automaticamente." />
+					<br />
+					<p:commandButton value="Sim" onclick="PF('dlg').hide()"
+						action="#{altaController.darAlta}" update="@form" />
+
+					<p:commandButton value="Não" onclick="PF('dlg').hide()" />
+
+				</p:dialog>
+
+
+			</p:column>
+		</p:dataTable>
+
+
+	</h:form>
+</h:body>
+
+
+</html>
