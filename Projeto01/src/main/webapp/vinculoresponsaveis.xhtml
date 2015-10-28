@@ -1,18 +1,94 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:rich="http://richfaces.org/rich"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:a4j="http://richfaces.org/a4j"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
-<h:head></h:head> 
-<body>
-    <rich:panel>
-        <f:facet name="header">
-        Write your own custom rich components with built-in AJAX support
-        </f:facet>
-		<h:outputText value="Panel Body" /> 
-	</rich:panel>
-</body> 
+<h:head>
+	<title>Vinculo de Responsaveis</title>
+</h:head>
+
+
+
+<h:body>
+
+	<ui:include src="/cabecalho.xhtml" />
+
+	<h:form>
+	
+		<p:panel header="Vinculo de responsaveis" style="margin-bottom:20px">
+			
+		<p:messages id="mensagens" showDetail="true" showSummary="false" />
+		<h:panelGrid columns="2">
+		
+		       <p:outputLabel value="Paciente:" />
+			   <p:selectOneMenu value="#{responsavelPacienteController.pacienteCdPaciente}">
+			       <f:selectItem itemValue="#{null}" itemLabel="Selecione..." />
+			       <f:selectItems value="#{usuarioController.usuarios}" var="usuarios" 
+			           itemValue="#{usuarios.cdUsuario}" itemLabel="#{usuarios.nmUsuario}" />
+			   </p:selectOneMenu>
+		
+			   <p:outputLabel value="Responsavel:" />
+			   <p:selectOneMenu value="#{responsavelPacienteController.responsavelCdResponsavel}">
+			       <f:selectItem itemValue="#{null}" itemLabel="Selecione..." />
+			       <f:selectItems value="#{responsavelController.listaResponsavel}" var="responsaveis" 
+			           itemValue="#{responsaveis.cdResponsavel}" itemLabel="#{responsaveis.nmResponsavel}" />
+			   </p:selectOneMenu>
+
+				<p:commandButton value="Cadastrar"
+					action="#{responsavelPacienteController.salvar()}" />
+				<p:commandButton value="Limpar" 
+					action="home.xhtml?faces-redirect=true" />
+		</h:panelGrid>
+		</p:panel>
+	</h:form>
+	
+
+	<h:form id="form">
+		<p:growl id="msgs" showDetail="true" />
+
+		<p:dataTable id="vinculos" var="vinculos" value="#{responsavelPacienteController.responsavelPacientes}"
+			editable="true" style="margin-bottom:20px" rows="10" paginator="true"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="10,25,50">
+			<f:facet name="header">
+           Lista de Vinculos
+       </f:facet>
+
+
+			<p:column headerText="Paciente" sortBy="#{vinculos.pacienteCdPaciente}" filterBy="#{vinculos.pacienteCdPaciente}">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{vinculos.pacienteCdPaciente}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText id="modelInput" value="#{vinculos.pacienteCdPaciente}"
+							style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Responsaveis" sortBy="#{vinculos.responsavelCdResponsavel}" filterBy="#{vinculos.responsavelCdResponsavel}">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{vinculos.responsavelCdResponsavel}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{vinculos.responsavelCdResponsavel}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+
+			<p:column style="width:32px">
+				<p:rowEditor />
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+
+
 </html>

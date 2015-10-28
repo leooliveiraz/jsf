@@ -24,5 +24,6 @@
   <mapping class="entidades.UltimasMovimentacoesDiferenca"/>
   <mapping class="entidades.Alertas"/>
   <mapping class="entidades.AlertasGerados"/>
+  <mapping class="entidades.ResponsavelPaciente"/>
  </session-factory>
 </hibernate-configuration>

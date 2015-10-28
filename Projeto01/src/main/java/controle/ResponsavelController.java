@@ -18,7 +18,7 @@ import persistencia.DaoResponsavel;
 import util.HibernateUtil;
 import entidades.Responsavel;
 
-@ManagedBean
+@ManagedBean(name="responsavelController")
 @ViewScoped
 public class ResponsavelController implements Serializable {
 	/**
