@@ -10,12 +10,13 @@ import java.util.List;
 import org.hibernate.Session;
 import org.junit.Test;
 
+import controle.AtendimentoController;
 import util.HibernateUtil;
 import entidades.Atendimento;
 
 public class DaoAtendimentoTest {
 
-	@Test
+	/*@Test
 	public void cadastraAtendimento(){
 		Date dt_atendimento = new Date();
 		Atendimento atendimento = new Atendimento(1,dt_atendimento, "LPROCHA");
@@ -52,8 +53,14 @@ public class DaoAtendimentoTest {
 			e.printStackTrace();
 			fail();
 		}
+	}*/
+	@Test
+	public void cadastraAtendimento2(){
+		AtendimentoController a = new AtendimentoController();
+		a.setCdPaciente(1);
+		a.setCd_tag(342342432);
+		a.cadastraAtendimento();
 	}
-
 
 
 }

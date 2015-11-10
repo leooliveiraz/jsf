@@ -53,6 +53,7 @@ public class LoginController implements Serializable{
 			this.dtCadastro = usuario.getDtCadastro();
 			this.senha = usuario.getSenha();
 
+			
 			return "home.xhtml";
 
 

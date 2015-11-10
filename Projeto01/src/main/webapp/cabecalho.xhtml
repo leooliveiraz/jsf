@@ -9,36 +9,49 @@
 	<!-- your page -->
 
 	<h:form>
-		<h:graphicImage library="imagens" name="logo.jpg" width="400"
-			height="50" />
+		<p:link href="home.xhtml">
+			<h:graphicImage library="imagens" name="logo.jpg" width="400"
+				height="50" />
+		</p:link>
+
+
 		<br />
 		<p:growl id="messages" />
 
 		<p:menubar>
 			<p:submenu label="Atendimento" icon="ui-icon-document">
-				<p:menuitem value="Novo Atendimento" url="cadastroatendimento.xhtml" icon="ui-icon-plusthick" />
-				<p:menuitem value="Alta" url="cadastroalta.xhtml" icon="ui-icon-suitcase" />
-				<p:menuitem value="Vínculo de Tags" url="vinculotags.xhtml" icon="ui-icon-link" />
-				<p:menuitem value="Vínculo de Responsavel" url="vinculoresponsaveis.xhtml" icon="ui-icon-link" />
+				<p:menuitem value="Novo Atendimento" url="cadastroatendimento.xhtml"
+					icon="ui-icon-plusthick" />
+				<p:menuitem value="Alta" url="cadastroalta.xhtml"
+					icon="ui-icon-suitcase" />
+				<p:menuitem value="Vínculo de Tags" url="vinculotags.xhtml"
+					icon="ui-icon-link" />
+				<p:menuitem value="Vínculo de Responsavel"
+					url="vinculoresponsaveis.xhtml" icon="ui-icon-link" />
 				<p:separator />
-				<p:menuitem value="Observações" url="#"	icon="ui-icon-folder-collapsed" />
-				<p:menuitem value="Responsáveis do Paciente" url="tabelaresponsavel.xhtml" icon="ui-icon-person" />
+				<p:menuitem value="Observações" url="#"
+					icon="ui-icon-folder-collapsed" />
 				<p:separator />
 			</p:submenu>
 
 			<p:submenu label="Consultas" icon="ui-icon-document">
 				<p:submenu label="Movimentações">
-					<p:menuitem value="Pacientes por Setor" url="tabelaultimasmovimentacoes.xhtml" />
+					<p:menuitem value="Pacientes por Setor"
+						url="tabelaultimasmovimentacoes.xhtml" />
 					<p:menuitem value="Alertas" url="tabelaalertasgerados.xhtml" />
 				</p:submenu>
 				<p:menuitem value="Atendimentos" url="#" />
 			</p:submenu>
 
 			<p:submenu label="Tabelas" icon="ui-icon-pencil">
-				<p:menuitem value="Setores" url="tabelasetor.xhtml" icon="ui-icon-star" />
+				<p:menuitem value="Setores" url="tabelasetor.xhtml"
+					icon="ui-icon-star" />
 				<p:menuitem value="Tipos de Alerta" url="#" icon="ui-icon-volume-on" />
-				<p:menuitem value="Antenas" url="tabelaantena.xhtml" icon="ui-icon-signal-diag" />
+				<p:menuitem value="Antenas" url="tabelaantena.xhtml"
+					icon="ui-icon-signal-diag" />
 				<p:menuitem value="Tags" url="tabelatags.xhtml" icon="ui-icon-tag" />
+				<p:menuitem value="Responsáveis do Paciente"
+					url="tabelaresponsavel.xhtml" icon="ui-icon-person" />
 			</p:submenu>
 
 			<p:submenu label="Configurações" icon="ui-icon-gear">
@@ -58,8 +71,10 @@
 
 			<f:facet name="options">
 				<p:outputLabel value="Usuário: #{loginController.cdUsuario}  " />
-				<p:commandButton type="button" value="Sair" icon="ui-icon-power"
-					action="#{logoffController.realizaLogoff}" />
+
+				<p:commandButton  value="Sair" icon="ui-icon-power"
+					action="#{logoffController.realizaLogoff}" ajax="false" />
+
 			</f:facet>
 		</p:menubar>
 	</h:form>

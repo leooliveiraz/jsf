@@ -24,28 +24,29 @@
 
 			<h:panelGrid columns="2">
 				<p:outputLabel value="Usuario:" />
-				<p:inputText value="#{usuarioController.cdUsuario}" />
+				<p:inputText id='usuario' value="#{usuarioController.cdUsuario}" required="true"/>
+								
+				<p:outputLabel value="Senha:" />
+				<p:password id="senha" value="#{usuarioController.senha}" required="true"/>
 
 				<p:outputLabel value="Nome:" />
-				<p:inputText value="#{usuarioController.nmUsuario}" />
+				<p:inputText id='nome' value="#{usuarioController.nmUsuario}" required="true"/>
 
 				<p:outputLabel value="CPF:" />
-				<p:inputText value="#{usuarioController.cpf}" />
+				<p:inputText id='cpf' value="#{usuarioController.cpf}" required="true" maxlength="11"  />
 
 				<p:outputLabel for="german" value="Data de Nascimento" />
 				<p:calendar id="german" value="#{usuarioController.dtNascimento}"
-					locale="pt_BR" navigator="true" pattern="dd/mm/yyyy" />
+					locale="pt_BR" navigator="true" pattern="dd/mm/yyyy" required="true"/>
 
 				<p:outputLabel for="german" value="Data de Cadastro" />
-				<p:calendar value="#{usuarioController.dtCadastro}" locale="pt_BR"
-					navigator="true" pattern="dd/mm/yyyy" />
+				<p:calendar id='dtcadastro' value="#{usuarioController.dtCadastro}" locale="pt_BR"
+					navigator="true" pattern="dd/mm/yyyy" required="true" />
 
-				<p:outputLabel value="Senha:" />
-				<p:password id="senha" value="#{usuarioController.senha}" />
 
 
 				<p:commandButton value="Cadastrar"
-					action="#{usuarioController.cadastraUsuario()}" />
+					action="#{usuarioController.cadastraUsuario()}"  update="mensagens" ajax="false"/>
 				<p:commandButton value="Limpar" 
 					action="cadastrousuario.xhtml?faces-redirect=true" />
 

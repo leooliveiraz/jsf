@@ -71,7 +71,7 @@ public class JobController implements Serializable {
 				
 			}
 			else{
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Não Realizado", "Iniciado JOB para identificar tags sem movimentação."));
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Não Realizado", "O JOB já está iniciado, por favor desligue e ligue novamente."));
 			}	
 				
 		} catch (SchedulerException e) {

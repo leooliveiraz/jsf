@@ -27,65 +27,82 @@
 
 			<p:dialog header="Escolha um Paciente" widgetVar="cad" dynamic="true"
 				modal="true" width="900px">
-				<h:panelGrid columns="2">
-					<h:outputLabel value="Nome" />
-					<p:inputText size="30" value="#{atendimentoController.nmPaciente}"
-						id="nome_paciente" />
-					<h:outputLabel value="CPF" />
-					<p:inputText size="15" maxlength="11"
-						value="#{atendimentoController.paciente_cpf}" id="cpf_paciente" />
-					<h:outputLabel value="Data de Nascimento" />
-					<p:calendar id="german"
-						value="#{atendimentoController.paciente_dtNascimento}"
-						locale="pt_BR" navigator="true" pattern="dd/mm/yyyy" />
-					<h:outputLabel value="Sexo" />
-					<p:selectOneMenu id="sexo_paciente"
-						value="#{atendimentoController.paciente_sexo}" style="width:125px">
-						<f:selectItem itemLabel="MASCULINO" itemValue="M" />
-						<f:selectItem itemLabel="FEMININO" itemValue="F" />
-					</p:selectOneMenu>
-					<h:outputLabel value="Mãe" />
-					<p:inputText size="30"
-						value="#{atendimentoController.paciente_nmMae}"
-						id="nm_Mae_Paciente" />
-					<h:outputLabel value="Pai" />
-					<p:inputText size="30"
-						value="#{atendimentoController.paciente_nmPai}"
-						id="nm_pai_Paciente" />
-					<h:outputLabel value="CEP" />
-					<p:inputText size="15" maxlength="8"
-						value="#{atendimentoController.paciente_cep}" id="cep_Paciente" />
-					<h:outputLabel value="Logradouro" />
-					<p:inputText size="30"
-						value="#{atendimentoController.paciente_logradouro}"
-						id="logradouro_Paciente" />
-					<h:outputLabel value="Numero" />
-					<p:inputText size="5"
-						value="#{atendimentoController.paciente_numero}"
-						id="numero_Paciente" />
-					<p:outputLabel value="Complemento" />
-					<p:inputText size="15"
-						value="#{atendimentoController.paciente_complemento}"
-						id="complemento_Paciente" />
-					<p:outputLabel value="Cidade" />
-					<p:inputText size="20"
-						value="#{atendimentoController.paciente_cidade}"
-						id="cidade_Paciente" />
-					<h:outputLabel value="UF" />
-					<p:inputText size="5" value="#{atendimentoController.paciente_uf}"
-						id="uf_paciente" />
-				</h:panelGrid>
-				<p:commandButton value="Cadastrar Paciente"
-					action="#{atendimentoController.cadastraPacientes}"
-					onclick="cad.hide" />
+				<form id="formcadastro">
 
+					<h:panelGrid columns="2">
+						<h:outputLabel value="Nome" />
+						<p:inputText size="30" value="#{atendimentoController.nmPaciente}"
+							id="nome_paciente" required="true" />
+
+						<h:outputLabel value="CPF" />
+						<p:inputText size="15" maxlength="11"
+							value="#{atendimentoController.paciente_cpf}" id="cpf_paciente" />
+
+						<h:outputLabel value="Data de Nascimento" />
+						<p:calendar id="german"
+							value="#{atendimentoController.paciente_dtNascimento}"
+							locale="pt_BR" navigator="true" pattern="dd/mm/yyyy"
+							required="true" />
+
+						<h:outputLabel value="Sexo" />
+						<p:selectOneMenu id="sexo_paciente"
+							value="#{atendimentoController.paciente_sexo}"
+							style="width:125px">
+							<f:selectItem itemLabel="MASCULINO" itemValue="M" />
+							<f:selectItem itemLabel="FEMININO" itemValue="F" />
+						</p:selectOneMenu>
+
+						<h:outputLabel value="Mãe" />
+						<p:inputText size="30"
+							value="#{atendimentoController.paciente_nmMae}"
+							id="nm_Mae_Paciente" required="true" />
+
+						<h:outputLabel value="Pai" />
+						<p:inputText size="30"
+							value="#{atendimentoController.paciente_nmPai}"
+							id="nm_pai_Paciente" />
+
+						<h:outputLabel value="CEP" />
+						<p:inputText size="15" maxlength="8"
+							value="#{atendimentoController.paciente_cep}" id="cep_Paciente"
+							required="true" />
+
+						<h:outputLabel value="Logradouro" />
+						<p:inputText size="30"
+							value="#{atendimentoController.paciente_logradouro}"
+							id="logradouro_Paciente" required="true" />
+
+						<h:outputLabel value="Numero" />
+						<p:inputText size="5"
+							value="#{atendimentoController.paciente_numero}"
+							id="numero_Paciente" required="true" />
+
+						<p:outputLabel value="Complemento" />
+						<p:inputText size="15"
+							value="#{atendimentoController.paciente_complemento}"
+							id="complemento_Paciente" />
+
+						<p:outputLabel value="Cidade" />
+						<p:inputText size="20"
+							value="#{atendimentoController.paciente_cidade}"
+							id="cidade_Paciente" required="true" />
+
+						<h:outputLabel value="UF" />
+						<p:inputText size="5" value="#{atendimentoController.paciente_uf}"
+							id="uf_paciente" required="true" />
+					</h:panelGrid>
+					<p:commandButton value="Cadastrar Paciente"
+						action="#{atendimentoController.cadastraPacientes}"
+						onclick="cad.hide"
+						update="mensagemcadastro"	 />
+				</form>
 			</p:dialog>
 			<br />
 			<p:commandButton value="Escolha um Paciente"
 				onclick="PF('dlg').show();" type="button" />
-			<p:inputText
+			<p:inputText id="cd_Paciente"
 				value="#{atendimentoController.cdPaciente} #{atendimentoController.nmPaciente}"
-				size="40" disabled="true" />
+				size="40" disabled="true" required="true" />
 
 
 
@@ -126,7 +143,6 @@
 								target="#{atendimentoController.cdPaciente}"
 								value="#{paciente1.cdPaciente}" />
 
-
 							<f:setPropertyActionListener
 								target="#{atendimentoController.nmPaciente}"
 								value="#{paciente1.nmPaciente}" />
@@ -160,7 +176,7 @@
 				widgetVar="tag" dynamic="true" width="900px" modal="true">
 
 				<p:dataTable var="tag" value="#{atendimentoController.listaTags}"
-				paginator="true" rows="10"
+					paginator="true" rows="10"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					rowsPerPageTemplate="10,25,50">
 					<p:column headerText="Código" sortBy="#{tag.cdTagFornecedor}"
@@ -188,21 +204,18 @@
 				</p:dataTable>
 			</p:dialog>
 
-			<p:inputText value="#{atendimentoController.tag_vinculada} "
-				size="40" disabled="true" />
+			<p:inputText id="tag" value="#{atendimentoController.tag_vinculada} "
+				size="40" disabled="true" required="true" />
 			<br />
 
 			<p:commandButton value="Cadastrar"
-				action="#{atendimentoController.cadastraAtendimento}">
-
-
+				action="#{atendimentoController.cadastraAtendimento}"
+				update="mensagens" ajax="false">
 				<f:setPropertyActionListener
 					target="#{atendimentoController.cdUsuarioEntrada}"
 					value="#{loginController.cdUsuario}" />
 			</p:commandButton>
 
-
-			
 			<p:commandButton value="Limpar"
 				action="cadastroatendimento.xhtml?faces-redirect=true"
 				update="@form" />

@@ -24,10 +24,10 @@
 
 			<h:panelGrid columns="2">
 				<p:outputLabel value="Código:" />
-				<p:inputText value="#{setorController.cdSetor}" />
+				<p:inputText id="codigo" value="#{setorController.cdSetor}" required="true" />
 
 				<p:outputLabel value="Nome:" />
-				<p:inputText value="#{setorController.nmSetor}" />
+				<p:inputText id="nome_do_setor" value="#{setorController.nmSetor}" required="true" />
 
 				<p:outputLabel value="Ativo:" />
 				<p:selectOneMenu id="Ativo" value="#{setorController.snAtivo}" style="width:125px">
@@ -37,7 +37,7 @@
 
 
 				<p:commandButton value="Cadastrar"
-					action="#{setorController.cadastraSetor()}" />
+					action="#{setorController.cadastraSetor()}" update="mensagens"/>
 				<p:commandButton value="Limpar" 
 					action="home.xhtml?faces-redirect=true" />
 

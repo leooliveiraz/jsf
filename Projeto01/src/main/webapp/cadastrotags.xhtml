@@ -25,7 +25,7 @@
 			<h:panelGrid columns="2">
 
 				<p:outputLabel value="Código do Fornecedor" />
-				<p:inputText value="#{tagsController.cdTagFornecedor}" />
+				<p:inputText id="codigo_fornecedor" value="#{tagsController.cdTagFornecedor}" required="true" />
 
 				<p:outputLabel value="Ativo:" />
 				<p:selectOneMenu id="Ativo" value="#{tagsController.snAtivo}" style="width:125px">
@@ -40,7 +40,7 @@
 
 
 				<p:commandButton value="Cadastrar"
-					action="#{tagsController.cadastraTag}" />
+					action="#{tagsController.cadastraTag}" update="mensagens" />
 				<p:commandButton value="Limpar" 
 					action="home.xhtml?faces-redirect=true" />
 

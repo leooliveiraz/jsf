@@ -24,13 +24,13 @@
 
 			<h:panelGrid columns="2">
 				<p:outputLabel value="Código:" />
-				<p:inputText value="#{antenaController.cdAntena}" />
+				<p:inputText value="#{antenaController.cdAntena}" required="true" />
 
 				<p:outputLabel value="Descrição:" />
-				<p:inputText value="#{antenaController.dsAntena}" />
+				<p:inputText value="#{antenaController.dsAntena}" required="true" />
 
 				<p:outputLabel value="IP" />
-				<p:inputText value="#{antenaController.cdIp}" />
+				<p:inputText value="#{antenaController.cdIp}" required="true" />
 
 				<p:outputLabel value="Setor" />
 				<p:selectOneMenu id="Setor" value="#{antenaController.setorCdSetor}"
@@ -41,7 +41,7 @@
 
 
 				<p:commandButton value="Cadastrar"
-					action="#{antenaController.cadastraAntena()}" />
+					action="#{antenaController.cadastraAntena()}" update="mensagens" />
 				<p:commandButton value="Limpar"
 					action="home.xhtml?faces-redirect=true" />
 

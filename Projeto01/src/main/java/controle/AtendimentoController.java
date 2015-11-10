@@ -272,34 +272,44 @@ public class AtendimentoController implements Serializable {
 	public void iniciar(){
 		buscaPacientes();
 		buscaTagsVinculo();
+		this.dtAtendimento = new Date();
 	}	
 
 
 
-	public String cadastraAtendimento(){
+	public void cadastraAtendimento(){
 		try{
 			System.out.println(this.cdUsuarioEntrada);
 			this.dtAtendimento = new Date();
-			Atendimento atendimento = new Atendimento(this.cdPaciente, new Date(),this.cdUsuarioEntrada);
-			Session session = new HibernateUtil().getSession();
-			DaoAtendimento dao = new DaoAtendimento(Atendimento.class, session);
-			session.beginTransaction();
-			dao.salvar(atendimento);
-			session.getTransaction().commit();
+			if(this.cdPaciente==0 || this.cd_tag == 0){
+				System.out.println(this.cdPaciente);
+				System.out.println(this.cd_tag);
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", "Não Foi possível cadastrar o Atendimento, por favor informe o paciente e a tag"));
 
-			this.atendimento = dao.buscaUltimoRegistro(session );
-			this.cdAtendimento = this.atendimento.getCdAtendimento();
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Cadastrado Atendimento:"+cdAtendimento));
-			
-			session.close();
+			}else{
+				System.out.println(this.cdPaciente);
+				System.out.println(this.cd_tag);
+				Atendimento atendimento = new Atendimento(this.cdPaciente, new Date(),this.cdUsuarioEntrada);
+				Session session = new HibernateUtil().getSession();
+				DaoAtendimento dao = new DaoAtendimento(Atendimento.class, session);
+				session.beginTransaction();
+				dao.salvar(atendimento);
+				session.getTransaction().commit();
+
+				this.atendimento = dao.buscaUltimoRegistro(session );
+				this.cdAtendimento = this.atendimento.getCdAtendimento();
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Cadastrado Atendimento:"+cdAtendimento));
+
+				session.close();
+				vinculaTag();
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", "Não Foi possivel cadastrar o Atendimento"));
-			
-		}
-		vinculaTag();	
 
-		return "home.xhtml";
+		}	
+
+		//return "home.xhtml";
 	}
 
 
@@ -349,7 +359,7 @@ public class AtendimentoController implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void vinculaTag(){
 		try{
 			System.out.println("usuario é "+ this.cdUsuarioEntrada);
@@ -361,12 +371,12 @@ public class AtendimentoController implements Serializable {
 			daoTag.atualizar(new Tags(this.cd_tag,this.tag_vinculada,"S","S"));
 			daoVinculo.salvar(tagsAtendimento);
 			session.getTransaction().commit();	
-			
+
 			session.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}
-	
+
 
 }
